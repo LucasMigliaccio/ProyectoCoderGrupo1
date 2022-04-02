@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creación Película</title>
+</head>
+<body>
+    <h1>CREAR UNA PELÍCULA</h1>
+
+    {% if myform.errors %}
+
+    <p style="color: greenyellow;"> Revisar los datos loquito </p>
+
+    {% endif %}
+
+    <form action="/cineproyecto/new-movie-form/" method="POST">{% csrf_token %}
+
+        <!-- Acta está la relacion de Formulario de DJANGO reemplazando a el HTML Form-->
+
+        <table>
+
+            {{myform.as_table}}
+
+        </table>
+
+        <input type="submit" value="INGRESAR">
+
+    </form>
+
+</body>
+</html>
