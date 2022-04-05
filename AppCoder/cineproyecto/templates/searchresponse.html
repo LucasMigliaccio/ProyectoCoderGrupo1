@@ -7,7 +7,12 @@
     <title>Resultado de la búsqueda</title>
 </head>
 <body>
-    <p>Resultado de la búsqueda de {{peliculas}}</p>
-    
+    <p>Resultado de la búsqueda</p>
+    <ul>
+        {%for pelicula in peliculas%}
+            <li>{{pelicula}}</li>
+
+        {%end for%}
+    </ul>
 </body>
 </html>
