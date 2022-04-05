@@ -9,3 +9,25 @@ class Movies(models.Model):
     dir = models.CharField("Director",max_length=30)
     act = models.CharField("ActorPrincipal",max_length=30)
     date = models.DateField("FechaLanzamiento")
+
+    def __str__(self) -> str:
+        return f"{self.name}-{self.dir}" 
+
+
+
+class Users(models.Model):
+    name = models.CharField("Nombre",max_length=30)
+    surname = models.CharField("Apellido",max_length=30)
+    user_name = models.CharField("Nombre de usuario",unique=True,max_length=30)
+    password = models.CharField("Contraseña", max_length=30)
+    mail = models.EmailField("Email")
+    birth_date = models.DateField("Fecha de Nacimiento")
+    other_info = models.CharField("Otros datos",max_length=30)
+    
+class Cinemas(models.Model):
+    name = models.CharField("Nombre",max_length=30)
+    address = models.CharField("Dirección",max_length=30)
+    num_of_seats = models.IntegerField("Capacidad")
+    mail = models.EmailField()
+    phone = models.CharField("Telefono",max_length=20)
+    other_info = models.CharField("Otros datos",max_length=30)
