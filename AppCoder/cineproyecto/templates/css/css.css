@@ -1,0 +1,50 @@
+:root {
+    --blanco:#FFFFFF;
+    --negro:#212121;
+    --amarillo: #ffc107;
+    --secundario: #0097a7;
+    --gris: #757575;
+}
+
+html{
+    font-size: 62.5%;
+}
+body {
+    font-size: 16px; /* 1 rem = 10px */
+    font-family: 'Lato', sans-serif;
+}
+
+.titulo {
+    text-align: center;
+    font-size: 3.8rem;
+    font-weight: 900;
+}
+
+.titulo2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.spam {
+    font-size: 2rem;
+}
+
+.contenedor {
+    width: 120rem;
+    margin: 1rem auto;
+}
+.nav-bg {
+    background-color: var(--secundario);
+}
+ 
+.navegacion-principal {
+    padding: 0,5rem;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navegacion-principal a {
+    background-color: var(--blanco);
+}

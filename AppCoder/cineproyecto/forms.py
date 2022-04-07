@@ -2,10 +2,10 @@ from django import forms
 
 class MoviesForm(forms.Form):
 
-    name = forms.CharField(max_length=30)
-    dir = forms.CharField(max_length=30)
-    act = forms.CharField(max_length=30)    
-    date = forms.DateField()
+    Nombre = forms.CharField(max_length=30)
+    Director = forms.CharField(max_length=30)
+    Actor = forms.CharField(max_length=30)    
+    Fecha = forms.DateField()
 
 class UserForm(forms.Form):
 

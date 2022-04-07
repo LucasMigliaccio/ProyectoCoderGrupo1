@@ -8,11 +8,12 @@
 </head>
 <body>
     <p>Resultado de la búsqueda</p>
-    <ul>
-        {%for pelicula in peliculas%}
-            <li>{{pelicula}}</li>
-
-        {%end for%}
-    </ul>
+        
+            {% for pelicula in peliculas %}
+              
+                <li>{{pelicula}}</li>
+                
+            {%end for%}
+        
 </body>
 </html>

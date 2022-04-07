@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEMA CENTER</title>
+    <link rel="stylesheet" href="'https://fonts.googleapis.com/css2?family=Lato:wght@300;900&display=swap'">
+    <link rel="preload" href="css/css.css" as="style">
+    <link rel="stylesheet" href="css/css.css">
+</head>
+<body>
+    <header>
+        <h1 class="titulo">CINEMA CENTER </spam></h1>
+        <h2 class="titulo2"> El cine en tus manos </h2>
+    </header>
+
+<div class="nav-bg">
+    <nav class="navegacion-principal contenedor">
+        <a href='{% url "Inicio" %}'>Incio</a>
+        <a href='{% url "Peliculas" %}'>Películas</a>
+        <a href='{% url "FormularioCine" %}'>Cines</a>
+        <a href='{% url "FormularioUsuario" %}'>Usuarios</a>
+
+        <a href='{% url "BusquedaPelicula" %}'>Buscar</a>
+    </nav>
+</div>
+    
+{% block contenido %}
+
+
+{% endblock contenido %}
+
+  <footer>
+  <p>Todos los derechos reservados Grupo 1</p>
+
+
+  </footer>
+
+</body>

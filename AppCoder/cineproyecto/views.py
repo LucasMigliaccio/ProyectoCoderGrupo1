@@ -16,7 +16,7 @@ def moviesForm(request):
         if myform.is_valid:
             print(myform)
             movie_info = myform.cleaned_data        
-            movie = Movies (name=movie_info["name"],dir=movie_info["dir"],act=movie_info["act"],date=movie_info["date"])
+            movie = Movies (name=movie_info["Nombre"],dir=movie_info["Director"],act=movie_info["Actor"],date=movie_info["Fecha"])
             movie.save()
             return HttpResponse(F"Pelicula creada")
     else:
@@ -60,8 +60,11 @@ def find (request):
         nombre = request.GET["nombre"]
         peliculas = Movies.objects.filter(name__icontains = nombre)
         return HttpResponse(peliculas)
-        #return render(request,"searchresponse.html",{"Título": peliculas})
-
+        
     else:
          respuesta = "Cargar nombre"
          return HttpResponse (respuesta)
+
+def index (request):
+    return render(request,"index.html")
+

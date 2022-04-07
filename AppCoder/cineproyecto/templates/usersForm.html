@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creación Usuarios</title>
 </head>
-<body>
+<body> -->
+
+{% extends 'padre.html' %}
+
+    {% block contenido %}
+
     <h1>CREAR UN USUARIO</h1>
 
     {% if myform.errors %}
@@ -28,6 +33,6 @@
         <input type="submit" value="INGRESAR">
 
     </form>
-
-</body>
-</html>
+    {% endblock contenido%}
+<!-- </body>
+</html> -->
