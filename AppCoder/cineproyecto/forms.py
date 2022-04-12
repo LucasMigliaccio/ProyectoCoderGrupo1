@@ -1,4 +1,6 @@
+from attr import fields
 from django import forms
+from forms import UserCreationForm
 
 class MoviesForm(forms.Form):
 
@@ -24,3 +26,14 @@ class CinemaForm(forms.Form):
     mail = forms.EmailField()
     phone = forms.IntegerField()
     other_info = forms.CharField(max_length=30)
+
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+    password1= forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2= forms.CharField(label=" Repetir Contraseña", widget=forms.PasswordInput)
+
+    class Meta:
+        model= User
+        fields = ["username", "email", "password1", "password2"]
+        help_texts= {k: "" for k in fields}
+

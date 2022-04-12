@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from .forms import MoviesForm, UserForm, CinemaForm
 from .models import Movies, Users, Cinemas
 from django.shortcuts import render
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 
@@ -67,4 +69,69 @@ def find (request):
 
 def index (request):
     return render(request,"index.html")
+
+def busqueda_actores(request):
+    return render(request, "busqueda_actores.html")
+
+def buscar(request):
+    if request.GET["actors"]:
+        
+        #mensaje= "Actor buscado: %r" %request.GET["actors"]
+        actor_consulta = request.GET["actors"]
+        actor_filtrado= Movies.objects.filter(act__icontains=actor_consulta)  
+
+        return render(request, "resultados_busqueda_actor.html", {"actor":actor_filtrado, "query":actor_consulta} )
+    else:
+        mensaje = "Cargar nombre"
+
+    return HttpResponse(mensaje)
+
+def login_request(request):
+    
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+        
+        if form.is_valid():
+            usuario= form.cleaned_data.get("usurname")
+            contra= form.cleaned_data.get("password")
+            
+            user = authenticate(username=usuario, password=contra)
+        
+            if user is not None:
+                login(request, user)
+
+                return render(request, "padre.html", {"mensaje":f"Bienvenido {usuario}"} )
+            else:
+                return render(request, "padre.html", {"mensaje":"Error datos incorrectos"} )
+        else:
+            return render(request, "padre.html", {"mensaje":"Error, formulario erroneo"} )
+
+    form= AuthenticationForm()
+
+    return render (request, "login.html", {"form":form} ) 
+
+
+def register(request):
+
+    if request.method == "POST":
+
+        form = UserCreationForm(request.POST) 
+
+        if form.is_valid():
+
+            username = form.cleaned_data["username"]
+
+            form.save()
+
+            return render(request, "inicio.html", {"mensaje": f"Usuario {username} creado"})
+
+    else:
+        form= UserCreationForm()
+
+    return render(request, "registro.html", {"form":form})    
+
+            
+    
+    
+
 

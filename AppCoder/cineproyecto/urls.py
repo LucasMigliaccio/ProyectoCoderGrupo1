@@ -1,6 +1,7 @@
 from django import views
 from django.urls import path
-from .views import movies, moviesForm, userForm, findmovie, find,cinemaForm, index
+from django.contrib.auth.views import LogoutView
+from .views import movies, moviesForm, register, userForm, findmovie, find,cinemaForm, index, busqueda_actores, buscar, login_request
 
 urlpatterns = [
     path('',index, name="Inicio"),
@@ -10,5 +11,12 @@ urlpatterns = [
     path('new-cinema-form/',cinemaForm, name="FormularioCine"),
     path('findmovie/', findmovie, name="BusquedaPelicula"),
     path('find/',find),
+    path('buscar_actores/', busqueda_actores, name= 'BusquedaActor'),
+    path('buscar/', buscar),
+    path('login/', login_request, name= 'Login'),
+    path('register/', register, name = 'Register'),
+    path("logout/", LogoutView.as_view(template_name="logout.html"), name="Logout"),
+    
+
     
 ]

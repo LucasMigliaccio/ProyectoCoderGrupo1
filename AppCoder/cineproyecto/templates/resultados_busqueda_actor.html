@@ -1,0 +1,25 @@
+<html>
+
+<body>
+
+<p> Estás buscando: <strong> {{query}} </strong>
+
+{% if actor %}
+    <p>actores encontrado: {{actor|length}} actor/es </p>
+
+    <ul> 
+        
+        {% for actores in actor %}
+            <li>
+                {{actor_filtrado}}
+
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+        <p> Actor no encontrado </p>
+{% endif %}
+
+</body>
+
+</html>
