@@ -9,11 +9,15 @@
 <body>
     <p>Resultado de la búsqueda</p>
         
-            {% for pelicula in peliculas %}
+    <ul>
+
+        {% for pelicula in peliculas %}
               
-                <li>{{pelicula}}</li>
+            <li>
+               {{pelicula}}
+            </li>
                 
-            {%end for%}
-        
+        {% endfor %}
+    </ul>
 </body>
 </html>

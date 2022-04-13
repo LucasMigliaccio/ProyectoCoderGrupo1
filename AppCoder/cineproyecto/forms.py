@@ -1,6 +1,6 @@
-from attr import fields
 from django import forms
-from forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class MoviesForm(forms.Form):
 
