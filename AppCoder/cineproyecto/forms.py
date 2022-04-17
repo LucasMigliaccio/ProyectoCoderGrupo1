@@ -1,7 +1,7 @@
-from django import forms
+from mailbox import Mailbox
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 from django.contrib.auth.models import User
-
 class MoviesForm(forms.Form):
 
     Nombre = forms.CharField(max_length=30)
@@ -11,21 +11,21 @@ class MoviesForm(forms.Form):
 
 class UserForm(forms.Form):
 
-    name = forms.CharField(max_length=30)
-    surname = forms.CharField(max_length=30)
-    user_name = forms.CharField(max_length=30)
-    password = forms.CharField(max_length=30)
-    mail = forms.EmailField()
-    birth_date = forms.DateField()
-    other_info = forms.CharField(max_length=30)
+    Nombre = forms.CharField(max_length=30)
+    Apellido = forms.CharField(max_length=30)
+    Usuario = forms.CharField(max_length=30)
+    Contraseña = forms.CharField(widget=forms.PasswordInput)
+    Mail = forms.EmailField()
+    Cumpleaños = forms.DateField()
+    Informacion = forms.CharField(max_length=30)
 
 class CinemaForm(forms.Form):
-    name = forms.CharField(max_length=30)
-    address = forms.CharField(max_length=30)
-    num_of_seats = forms.IntegerField()
-    mail = forms.EmailField()
-    phone = forms.IntegerField()
-    other_info = forms.CharField(max_length=30)
+    Nombre = forms.CharField(max_length=30)
+    Direccion = forms.CharField(max_length=30)
+    Asientos = forms.IntegerField()
+    Mail= forms.EmailField()
+    Telefono = forms.IntegerField()
+    Informacion = forms.CharField(max_length=30)
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()

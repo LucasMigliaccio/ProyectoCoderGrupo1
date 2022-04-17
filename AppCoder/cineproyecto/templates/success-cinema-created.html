@@ -1,0 +1,9 @@
+{% extends 'main-template.html' %}
+
+    {% block contenido %}
+       <h2> Cine creado exitosamente </h2>
+       <br>
+       <a href='{% url "FormularioCine" %}'>Crear nuevo cine </a> &emsp;
+        <a href='{% url "Findcinema" %}'>Buscar cine </a> &emsp;
+
+    {% endblock contenido%}

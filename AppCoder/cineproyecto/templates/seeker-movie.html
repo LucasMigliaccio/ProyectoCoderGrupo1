@@ -1,0 +1,16 @@
+{% extends 'main-template.html' %}
+    {% block contenido %}
+        
+        <a href='{% url "Peliculas" %}'>Crear nueva película </a> &emsp;
+        
+    
+        <h1>BUSCAR UNA PELÍCULA</h1>
+
+    
+            <form action= "/cineproyecto/find-movie-get/" method="GET">
+
+                <input type="text" name = "nombre"> 
+                <input type="submit" value="BUSCAR">
+
+            </form>
+    {% endblock contenido %}

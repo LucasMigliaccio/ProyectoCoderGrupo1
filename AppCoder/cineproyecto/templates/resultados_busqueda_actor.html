@@ -1,25 +1,21 @@
-<html>
+{% extends 'main-template.html' %}
+    {% block contenido %}
+        <p> Estás buscando: <strong> {{query}} </strong>
 
-<body>
+        {% if actor %}
+            <p>actores encontrado: {{actor|length}} actor/es </p>
 
-<p> Estás buscando: <strong> {{query}} </strong>
-
-{% if actor %}
-    <p>actores encontrado: {{actor|length}} actor/es </p>
-
-    <ul> 
+            <ul> 
         
-        {% for actores in actor %}
-            <li>
-                {{actor_filtrado}}
+            {% for actores in actor %}
+                <li>
+                    {{actor_filtrado}}
 
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-        <p> Actor no encontrado </p>
-{% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p> Actor no encontrado </p>
+        {% endif %}
 
-</body>
-
-</html>
+    {% endblock contenido %}

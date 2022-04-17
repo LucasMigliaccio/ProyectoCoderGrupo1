@@ -1,17 +1,14 @@
-
-<html>
-<head>
-    
+{% extends 'main-template.html' %}
+    {% block contenido %}
     <title>Búsqueda de actores</title>
-</head>
-<body>
-    <h1>Busqueda actores<h1>
-    <form action="/cineproyecto/buscar/" method="GET">
+        <h2>Busqueda actores</h2>
+            <form action="/cineproyecto/buscar/" method="GET">
         
-        <input type="text" name="actors"> 
-        <input type="submit" vale="Buscar">
+            <input type="text" name="actors"> 
+            <input type="submit" vale="Buscar">
 
-    </form>
-    
-</body>
-</html>
+             </form>
+             
+             
+             
+    {% endblock contenido %}

@@ -1,0 +1,14 @@
+{% extends 'main-template.html' %}
+    {% block contenido %}
+    <a href='{% url "FormularioCine" %}'>Crear nuevo cine </a> &emsp;
+    <a href='{% url "Findcinema" %}'>Buscar cine </a> &emsp;
+        <p>Resultado de la búsqueda</p>
+        
+                {% for cinema in cinemas %}
+              
+                    <li>{{cinema.name}}   -   {{cinema.address}}   -   {{cinema.num_of_seats}}   -   {{cinema.mail}}   -   {{cinema.phone}}   -   {{cinema.other_info}}</li>
+                
+                {% endfor %}
+    {% endblock contenido %}
+</body>
+</html>

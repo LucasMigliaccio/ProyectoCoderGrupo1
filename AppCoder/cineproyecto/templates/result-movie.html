@@ -1,0 +1,14 @@
+{% extends 'main-template.html' %}
+    {% block contenido %}
+    <a href='{% url "Peliculas" %}'>Crear nueva película </a> &emsp;
+    <a href='{% url "BusquedaPelicula" %}'>Buscar película </a> &emsp;
+        <p>Resultado de la búsqueda</p>
+        
+                {% for movie in movies %}
+              
+                    <li>{{movie.name}}   -   {{movie.dir}}   -   {{movie.act}}   -   {{movie.date}}</li>
+                
+                {% endfor %}
+    {% endblock contenido %}
+</body>
+</html>

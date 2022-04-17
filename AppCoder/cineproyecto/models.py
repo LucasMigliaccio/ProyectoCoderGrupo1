@@ -1,7 +1,7 @@
+from tkinter import Widget
 from django.db import models
 from stat import FILE_ATTRIBUTE_DIRECTORY
-from django.forms import CharField
-
+from django.forms import CharField, PasswordInput
 # Create your models here.
 
 class Movies(models.Model):

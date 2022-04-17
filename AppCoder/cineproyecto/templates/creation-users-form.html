@@ -1,0 +1,28 @@
+{% extends 'main-template.html' %}
+
+    {% block contenido %}
+
+    <h1>CREAR UN USUARIO</h1>
+
+    {% if myform.errors %}
+
+    <p style="color: greenyellow;"> Revisar los datos ingresados </p>
+
+    {% endif %}
+
+    <form action="/cineproyecto/creation-user-form/" method="POST">{% csrf_token %}
+
+        <!-- Acta está la relacion de Formulario de DJANGO reemplazando a el HTML Form-->
+
+        <table>
+
+            {{myform.as_table}}
+
+        </table>
+
+        <input type="submit" value="INGRESAR">
+
+    </form>
+    {% endblock contenido%}
+<!-- </body>
+</html> -->
