@@ -1,12 +1,36 @@
 {% extends 'main-template.html' %}
     {% block contenido %}
+
+    <body>
+
         
-        <a href='{% url "Peliculas" %}'>Crear nueva película </a> &emsp;
-        <a href='{% url "BusquedaPelicula" %}'>Buscar película </a> &emsp;
+    <div class="tail-top">
+        <div class="tail-bottom">
+            <div id="main">
+                <div id="content">
+                    <div class="line-hor"></div>
+                    <div class="box">
+                      <div class="border-right">
+                        <div class="border-left">
+                          <div class="inner">
+                
+                        <a href='{% url "Peliculas" %}' color="black">Crear nueva película </a> &emsp; 
+                        <a href='{% url "BusquedaPelicula" %}'>Buscar película </a> &emsp; 
+                
+                    
+                         <h3> Películas del site </h3>
         
-            <h3> Películas del site </h3>
-        
-                {% for movie in movies %}
-                    <li>{{movie.name}}   -   {{movie.dir}}   -   {{movie.act}}   -   {{movie.date}}</li>
-                {% endfor %}
+                         {% for movie in movies %}
+                         <li>{{movie.name}}   -   {{movie.dir}}   -   {{movie.act}}   -   {{movie.date}}</li>
+                         {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    </body>
     {% endblock contenido %}
