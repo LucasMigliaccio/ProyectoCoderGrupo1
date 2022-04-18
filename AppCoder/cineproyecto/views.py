@@ -1,12 +1,10 @@
-from collections import _OrderedDictValuesView
-import re
-from typing import OrderedDict
 from django.http import HttpResponse
-from .forms import MoviesForm, UserForm, CinemaForm
+from .forms import MoviesForm, UserForm, CinemaForm, UserRegisterForm
 from .models import Movies, Users, Cinemas
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 
 # Create your views here.
 def index (request):
@@ -60,7 +58,7 @@ def creationcinemaForm(request):
         myform = CinemaForm()
         return render (request,"creation-cinema-form.html",{"myform":myform})
 
-
+#Movies
 def seekermovie (request):
     return render(request,"seeker-movie.html")
 
@@ -72,7 +70,7 @@ def findmovieget (request):
         
     else:
          return render(request,"find-movie-get-else.html")
-
+#Cinemas
 def seekercinema (request):
     return render(request,"seeker-cinema.html")
 
@@ -86,23 +84,22 @@ def findcinemaget (request):
          return render(request,"find-cinema-get-else.html")
 
 
+#Actores
+def busqueda_actores(request):
+    return render(request, "busqueda_actores.html")
 
-
-# def busqueda_actores(request):
-#     return render(request, "busqueda_actores.html")
-
-# def buscar(request):
-#     if request.GET["actors"]:
+def buscar(request):
+    if request.GET["actors"]:
         
-#         mensaje= "Actor buscado: %r" %request.GET["actors"]
-#         actor_consulta = request.GET["actors"]
-#         actor_filtrado= Movies.objects.filter(act__icontains=actor_consulta)  
+        #mensaje= "Actor buscado: %r" %request.GET["actors"]
+        actors = request.GET["actors"]
+        actor_filtrado= Movies.objects.filter(act__icontains=actors)  
+        #return HttpResponse (actor_filtrado)
+        return render(request, "resultados_busqueda_actor.html", {"actor_filtrado":actor_filtrado, "query":actors} )
+    else:
+        mensaje = "Cargar nombre"
 
-#         return render(request, "resultados_busqueda_actor.html", {"actor":actor_filtrado, "query":actor_consulta} )
-#     else:
-#         mensaje = "Cargar nombre"
-
-#     return HttpResponse(mensaje)
+    return HttpResponse(mensaje)
 
 # def login_request(request):
     
@@ -129,7 +126,19 @@ def findcinemaget (request):
 #     return render (request, "login.html", {"form":form} ) 
 
 
-# def register(request):
+def register(request):
+    if request.method == "POST":
+        form= UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data["username"]
+            messages.success(request, f"Usuario {username} creado")
+            return redirect("Inicio")
+    else:
+        form= UserRegisterForm()
+
+    context= {"form":form}
+    return render(request, "register.html", context)
 
 #     if request.method == "POST":
 

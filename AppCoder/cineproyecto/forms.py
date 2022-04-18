@@ -2,6 +2,7 @@ from mailbox import Mailbox
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
+
 class MoviesForm(forms.Form):
 
     Nombre = forms.CharField(max_length=30)

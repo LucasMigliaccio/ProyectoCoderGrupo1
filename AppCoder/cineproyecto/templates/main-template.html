@@ -49,6 +49,17 @@
     <script type="text/javascript"> Cufon.now(); </script>
     <!-- END PAGE SOURCE -->
 
+<!-- MESSAGES -->   
+{% if messages %}
+  {% for message in messages %}
+  <div style="color: red;" style="text-align: center;" class="notification {{message.tags}}">
+
+    {{ message }}
+  </div>
+  {% endfor %}
+{% endif %}
+
+<!-- CONTENIDO -->
 {% block contenido %}
 
 
