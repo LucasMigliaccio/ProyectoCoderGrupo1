@@ -1,12 +1,36 @@
 {% extends 'main-template.html' %}
     {% block contenido %}
-    <form class="form" method="post">
 
-        {% csrf_token %}
-        
-        {{form.as_p}}
+    <div class="tail-top">
+        <div class="tail-bottom">
+            <div id="main">
+                <div id="content">
+                    <div class="line-hor"></div>
+                    <div class="box">
+                      <div class="border-right">
+                        <div class="border-left">
+                          <div class="inner">
 
-        <button type="submit" id="submit">Login</button>
+                            <h3> Ingreso Usuario</h3>
 
-    </form>
+                            <form class="form" method="post">
+
+                                {% csrf_token %}
+                                
+                                {{form.as_p}}
+
+                                <button type="submit" id="submit">Login</button>
+
+                            </form>
+                            
+                            <h5> <a href="{% url 'Register' %}">¿Primera vez? ¡Registrate!</a></h5>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
     {% endblock contenido %}

@@ -7,17 +7,20 @@
     <link href="{% static 'cineproyecto/css/style.css' %}" rel="stylesheet" type="text/css" />
 
     {% block contenido %}
-    <body>
+      <body>
 
         
         <div class="tail-top">
             <div class="tail-bottom">
               <div id="main">
-
                 <div id="content">
                     <div id="slogan">
                       <div class="image png"></div>
                       <div class="inside">
+                        {% if request.user.is_authenticated %}
+                          <h4> Hola {{user.username}}</h4>
+                          {% endif  %}
+                   
                         <h2>Tu Web de Cine<span>Te está esperando</span></h2>
                         <p>Todas las novedades y las películas que te gustan en un solo lugar. Sumate.</p>
                         <div class="wrapper"><a href="#" class="link1"><span><span>Mirá Más</span></span></a></div>
@@ -44,5 +47,5 @@
             </div>
             </div>  
         </div> 
-    </body>
+      </body>
     {% endblock contenido%}
