@@ -4,14 +4,17 @@ from typing import OrderedDict
 from django.http import HttpResponse
 from .forms import MoviesForm, UserForm, CinemaForm
 from .models import Movies, Users, Cinemas
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.urls import reverse_lazy
 # Create your views here.
 def index (request):
     return render(request,"index.html")
-
+"""
 def allmovieslist (request):
     movies = Movies.objects.all().order_by('name')
     return render(request,"all-movies-list.html",{'movies':movies})
@@ -32,7 +35,7 @@ def creationmoviesForm(request):
     else:
         myform = MoviesForm()
     return render (request,"creation-movies-form.html",{"myform":myform})
-
+"""
 def creationuserForm(request):
     if request.method == "POST":
         myform = UserForm(request.POST)
@@ -85,6 +88,42 @@ def findcinemaget (request):
     else:
          return render(request,"find-cinema-get-else.html")
 
+
+class Allmovieslist (ListView):
+    model = Movies
+    template_name = "all-movies-list.html"
+    
+    def get_queryset(self):
+        return Movies.objects.order_by('name')
+
+class CreationmovieForm(CreateView):
+    model = Movies
+    template_name = "creation-movies-form.html"
+    success_url = "/cineproyecto/all-movies-list"
+    fields = ['name','dir','act','date']
+
+class DeleteMovie(DeleteView):
+    model = Movies
+    template_name = 'confirm-delete-movies.html'
+    success_url = "/cineproyecto/all-movies-list"
+
+class UpdateMovies(UpdateView):
+    model = Movies
+    template_name = "update-movies.html"
+    success_url = "/cineproyecto/all-movies-list"
+    fields = ['name','dir','act','date']
+
+class DetailMovies(DetailView):
+    model = Movies
+    template_name = "detail-movie.html"
+
+
+class Allcinemalist (ListView):
+    model = Cinemas
+    template_name = "all-cinemas-list.html"
+    
+    def get_queryset(self):
+         return Cinemas.objects.order_by('name')
 
 
 

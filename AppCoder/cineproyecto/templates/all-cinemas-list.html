@@ -5,7 +5,7 @@
         <a href='{% url "FormularioCine" %}'>Crear nuevo cine </a> &emsp;
         <a href='{% url "Findcinema" %}'>Buscar cine </a> &emsp;
         <h3> CINES REGISTRADOS </h3>
-            {% for cinema in cinemas %}
+            {% for cinema in object_list %}
                 <li>{{cinema.name}}   -   {{cinema.address}}   -   {{cinema.num_of_seats}}   -   {{cinema.mail}}   -   {{cinema.phone}}   -   {{cinema.other_info}}</li>
             {% endfor %}
 

@@ -1,16 +1,16 @@
 {% extends 'main-template.html' %}
     {% block contenido %}
-        
+        <br><br>
         <a href='{% url "Peliculas" %}'>Crear nueva película </a> &emsp;
-        
-    
+        <br><br> <br>   
         <h1>BUSCAR UNA PELÍCULA</h1>
-
+        <br><br>
     
-            <form action= "/cineproyecto/find-movie-get/" method="GET">
+        <form action= "/cineproyecto/find-movie-get/" method="GET">
 
                 <input type="text" name = "nombre"> 
-                <input type="submit" value="BUSCAR">
+                <input type="submit" value="Buscar">
 
             </form>
+            <br><br> <br> 
     {% endblock contenido %}

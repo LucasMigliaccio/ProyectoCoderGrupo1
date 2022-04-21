@@ -1,30 +1,31 @@
 {% extends 'main-template.html' %}
     
     {% block contenido %}
-
+        <br>
         <a href='{% url "BusquedaPelicula" %}'>Buscar película </a> &emsp;
+        <br><br>
         <h1>CREAR UNA PELÍCULA</h1>
-
+        <br><br>
         {% if myform.errors %}
 
         <p style="color: greenyellow;"> Revisar los datos loquito </p>
 
         {% endif %}
 
-        <form action="/cineproyecto/creation-movie-form/" method="POST">{% csrf_token %}
+        <form method="POST">{% csrf_token %}
 
         <!-- Acta está la relacion de Formulario de DJANGO reemplazando a el HTML Form-->
 
             <table>
 
-                {{myform.as_table}}
+                {{ form.as_p }}
 
             </table>
 
         <input type="submit" value="INGRESAR">
 
     </form>
-
+    <br><br>
 {% endblock contenido%}
 
 <!-- </body>

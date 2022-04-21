@@ -1,0 +1,17 @@
+{% extends 'main-template.html' %}
+
+    {% block contenido %}
+        <br><br>
+        Título: {{object.name}}<br>
+        Director: {{object.dir}}<br>
+        Actor: {{object.act}}<br>
+        Año de lanzamiento: {{object.date}}
+
+
+
+
+
+        <br><br>
+        <a href='{% url "Movieslist" %}'> Regresar </a>
+
+    {% endblock contenido %}

@@ -1,0 +1,9 @@
+{% extends 'main-template.html' %}<!DOCTYPE html>
+{% block contenido %}
+
+    <form method = "POST">{% csrf_token %}
+            ¿Estas seguro que quieres eliminar la película {{object}}?
+            <input type="submit" value="Eliminar">
+
+    </form>
+{% endblock contenido %}
