@@ -1,6 +1,5 @@
 {% extends 'main-template.html' %}
     {% block contenido %}
-
     <div class="tail-top">
         <div class="tail-bottom">
             <div id="main">
@@ -11,20 +10,14 @@
                         <div class="border-left">
                           <div class="inner">
 
-                            <h3> Ingreso Usuario</h3>
-
-                            <form class="form" method="post">
-
-                                {% csrf_token %}
+                            <h3> Creación de Nuevo Usuario </h3>
+                            <form class="form" method="post"> {% csrf_token %}
                                 
                                 {{form.as_p}}
 
-                                <button type="submit" id="submit">Login</button>
+                                <button type="submit" id="submit"> Registrate :D </button>
 
                             </form>
-                            
-                            <h5> <a href="{% url 'Register' %}">¿Primera vez? ¡Registrate!</a></h5>
-
                         </div>
                     </div>
                 </div>
@@ -33,4 +26,8 @@
     </div>
 </div>
 </div>
+       
+
     {% endblock contenido %}
+</body>
+</html>

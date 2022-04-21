@@ -19,10 +19,16 @@
                         <br><br><br>
                         {% for movie in object_list%}
                             <li>
-                                {{movie.name}} &emsp;
+                                {{movie}} &emsp;
                                 <a href='{% url "Detalles" movie.id %}'> Detalles </a> &nbsp;
-                                <a href='{% url "Edit" movie.id %}'> Editar </a> &nbsp;
-                                <a href='{% url "Borrar" movie.id %}'> Eliminar </a> &nbsp;
+                                {% if request.user.is_authenticated %}
+                                    <a href='{% url "Edit" movie.id %}'> Editar </a> &nbsp;
+                                    <a href='{% url "Borrar" movie.id %}'> Eliminar </a> &nbsp;
+                                {% endif  %}
+                                
+                                
+                                
+                                
                             </li>
                         {% endfor %}
                         

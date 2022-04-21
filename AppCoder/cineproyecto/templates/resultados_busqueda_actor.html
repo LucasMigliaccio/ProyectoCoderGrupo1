@@ -1,21 +1,23 @@
 {% extends 'main-template.html' %}
     {% block contenido %}
-        <p> Estás buscando: <strong> {{query}} </strong>
-
-        {% if actor %}
-            <p>actores encontrado: {{actor|length}} actor/es </p>
-
-            <ul> 
+    <p> Estás buscando: <strong> {{query}} </strong>
+    
+        {% if actor_filtrado %}
+            <p>actores encontrado: {{actor_filtrado|length}} actor/es </p>
         
-            {% for actores in actor %}
-                <li>
-                    {{actor_filtrado}}
-
-                </li>
-            {% endfor %}
+            <ul>                  <!-- primer key del view buscar -->
+                {% for actores in actor_filtrado %}
+                    <li>
+        
+                        {{actores.act}} 
+        
+                    </li>
+                {% endfor %}
             </ul>
+        
         {% else %}
-            <p> Actor no encontrado </p>
+                <p> Actor no encontrado </p>
         {% endif %}
 
     {% endblock contenido %}
+

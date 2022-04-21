@@ -1,0 +1,49 @@
+{% extends 'main-template.html' %}
+
+    {% block contenido %}
+
+<div class="tail-top">
+<div class="tail-bottom">
+<div id="main">
+<div id="content">
+<div class="line-hor"></div>
+<div class="box">
+<div class="border-right">
+<div class="border-left">
+<div class="inner">
+
+
+    <h3>Editar Usuario</h3>
+
+    {% if form.errors %}
+
+    <p style="color: greenyellow;"> Revisar los datos ingresados </p>
+
+    {% endif %}
+
+    <form action="/cineproyecto/edit_user/" method="POST">{% csrf_token %}
+
+        <h4> Hola {{user}}, modificá tus datos e ingresa tu contraseña para confirmar:</h4>
+        <!-- Acta está la relacion de Formulario de DJANGO reemplazando a el HTML Form-->
+
+        <table>
+
+            {{form.as_table}}
+
+        </table>
+
+        <input type="submit" value="EDITAR">
+
+    </form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    {% endblock contenido%}
+<!-- </body>
+</html> -->

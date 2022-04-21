@@ -240,6 +240,11 @@ h2 span {
 	font-size:40px;
 	color:#2c6d9a;
 }
+
+.margen {
+	border-radius:30px auto;
+}
+
 h3 {
 	font-size:30px;
 	line-height:1.2em;
@@ -254,10 +259,19 @@ h3 span {
 	color:#d72a18;
 }
 h4 {
+	font-size:30px;
+	line-height:1.2em;
+	letter-spacing:-1px;
+	color:#f10d0d;
+	margin-bottom:18px;
+}
+
+h5 {
 	font-size:20px;
 	line-height:1.2em;
 	letter-spacing:-1px;
-	color:#2c6d9a;
+	text-underline-offset: 0;
+	color:#0f04df;
 	margin-bottom:18px;
 }
 .link1 {
