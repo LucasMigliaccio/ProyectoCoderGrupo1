@@ -1,0 +1,27 @@
+{% extends 'main-template2.html' %}
+    {% block contenido %}
+    {% load static %}
+            
+    <h3>Sobre <span>Nosotros</span></h3>
+    <p class="p1">Gracias a la comunidad de CoderHouse surgió este grupo que nos dio la oprtunidad de desarrollar esta web inicial sobre un gusto compartido: <span> EL CINE. </span> </p>
+    <p>La web actual que se muestra busca tener bases relacionadas para permitir a los usuarios acceso a una base de datos sólidas, con posibilidad de compartir 
+      todo tipo de material y conocimientos mediantes posteos, siempre supervisados por los administradores. El registro de cines en con vistas de poder publicar horarios
+      y llegar a gestionar reservas de tickets
+    </p>
+             
+            
+       <div class="content">
+          <h3>Nuestro <span>Grupo 1</span></h3>
+          <ul class="list">
+            <div class="cat"> 
+            <li><img src="{% static 'cineproyecto/images/2page-img1.jpg'%}" style= "max-width:20%; height:auto;"/><a href="#">Juan Pablo Baigorria</a><br />
+              Cursustellentesque enim justo vestasse vitae trices phasellus leo sociis leo magnisl. Malestibulusnatis quisque felit odio ut nunc convallis semper sente ris feugiat.</li>
+            <li><img src="{% static 'cineproyecto/images/2page-img2.jpg'%}" style= "max-width:20%; height:auto;" /><a href="#">Lucas Miglaccio</a><br />
+              Cursustellentesque enim justo vestasse vitae trices phasellus leo sociis leo magnisl. Malestibulusnatis quisque felit odio ut nunc convallis semper sente ris feugiat.</li>
+            <li><img src="{% static 'cineproyecto/images/2page-img3.jpg' %}" style= "max-width:20%; height:auto;" /><a href="https://www.linkedin.com/in/lucas-romanelli-62992841/">Lucas Romanelli</a><br />
+              Contador Público y amante del cine en todas sus formas. Me gusta viajar. Hace un tiempo comence con la afición de lenguajes de programación, sobre todo para manipulación de datos.</li>
+            </div>
+          </ul>
+        
+      
+      {% endblock contenido %} 

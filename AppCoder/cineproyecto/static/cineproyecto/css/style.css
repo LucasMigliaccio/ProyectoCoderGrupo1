@@ -34,6 +34,13 @@ img {
 	vertical-align:top;
 	text-align:left;
 }
+
+.cat {
+	height:160px;
+ 	width: 160px;
+
+}
+
 ul, ol {
 	list-style:none;
 }

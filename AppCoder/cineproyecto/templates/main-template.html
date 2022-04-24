@@ -17,8 +17,8 @@
     <link href="css/ie6.css" rel="stylesheet" type="text/css" />
     <![endif]-->
     </head>
-<body id="page1">
-<!-- START PAGE SOURCE -->
+    <body id="page1">
+      <!-- START PAGE SOURCE -->
 <div class="tail-top">
   <div class="tail-bottom">
     <div id="main">
@@ -28,65 +28,69 @@
           <ul>
             <li><a href="{% url 'Inicio' %}"><img src="{% static 'cineproyecto/images/icon1-act.gif' %}" alt="" /></a></li>
             <li><a href="#"><img src="{% static 'cineproyecto/images/icon2.gif' %}" alt="" /></a></li>
-            <li><a href="{% url 'login' %}"><img src="{% static 'cineproyecto/images/login-icon-3048.png' %}" alt="" /></a></li>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'logout' %}#"><img src="{% static 'cineproyecto/images/icon3.gif' %}" alt="" /></a></li>
+            <li><a href="{% url 'logout' %}"><img src="{% static 'cineproyecto/images/icon3.gif' %}" alt="" /></a></li>
+            {% if avatar.picutre %}
+            <li><a href="{% url 'logout' %}"><img src="{{ avatar.picture.url }}" style= "max-width:10%; height:auto;" /></a></li>
+            {% endif %}
+            {% else %}
+            <li><a href="{% url 'login' %}"><img src="{% static 'cineproyecto/images/login-icon-3048.png' %}" alt="" /></a></li>
             {% endif %}
           </div>
-        <div class="row-2">
-          <ul>
-            <li><a href="{% url 'Inicio' %}" class="active">Inicio</a></li>
-            <li><a href="{% url 'Movieslist' %}">Películas</a></li>
-            <li><a href="#">Estrellas</a></li>
-            <li><a href="{% url 'Cinemalist' %}">Cines</a></li>
-            <li class="last"><a href="#">Contenido</a></li>
-          </ul>
+          <div class="row-2">
+            <ul>
+              <li><a href="{% url 'Inicio' %}" class="active">Inicio</a></li>
+              <li><a href="{% url 'Movieslist' %}">Películas</a></li>
+              <li><a href="{% url 'Actorslist' %}">Estrellas</a></li>
+              <li><a href="{% url 'Cinemalist' %}">Cines</a></li>
+              <li class="last"><a href="{% url 'AllPages' %}">Contenido</a></li>
+            </ul>
+          </div>
         </div>
+        
       </div>
-      
     </div>
-</div>
-</div>
-    
-    <script type="text/javascript"> Cufon.now(); </script>
-    <!-- END PAGE SOURCE -->
-
-<!-- MESSAGES -->   
-{% if messages %}
+  </div>
+  
+  <script type="text/javascript"> Cufon.now(); </script>
+  <!-- END PAGE SOURCE -->
+  
+  <!-- MESSAGES -->   
+  {% if messages %}
   {% for message in messages %}
   <div style="color: red;" style="text-align: center;" class="notification {{message.tags}}">
-
+    
     {{ message }}
   </div>
   {% endfor %}
-{% endif %}
-
-<!-- CONTENIDO -->
-{% block contenido %}
-
-
-{% endblock contenido %}
-<div class="tail-top">
-<div class="tail-bottom">
-<div id="main"> 
-<div id="footer">
-    <div class="left">
-        <div class="right">
-            <div class="footerlink">
+  {% endif %}
+  
+  <!-- CONTENIDO -->
+  {% block contenido %}
+  
+  
+  {% endblock contenido %}
+  <div class="tail-top">
+    <div class="tail-bottom">
+      <div id="main"> 
+        <div id="footer">
+          <div class="left">
+            <div class="right">
+              <div class="footerlink">
                 <p class="lf">Copyright &copy; 2022 <a href="#">CinemaCenter</a> - Todos los Derechos Reservados</p>
-                <p class="rf">Design by <a href="http://www.templatemonster.com/">TemplateMonster</a></p>
-                <p class="rf">Edited by <a href="http://www.templatemonster.com/">Grupo UNO </a></p>
+                <p class="rf">Design by <a href="http://www.templatemonster.com/">TemplateMonster</a></p> &emsp;
+                <p class="rf">Edited by <a href="{% url 'About' %}">Grupo UNO </a></p> &emsp;
                 <div style="clear:both;"></div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
-</div>
-
-<script type="text/javascript"> Cufon.now(); </script>
-<!-- END PAGE SOURCE -->
-
+  </div>
+  
+  <script type="text/javascript"> Cufon.now(); </script>
+  <!-- END PAGE SOURCE -->
+  
 </body>
 </html>

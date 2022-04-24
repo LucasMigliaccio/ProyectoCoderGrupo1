@@ -1,0 +1,18 @@
+{% extends 'main-template2.html' %}
+
+    {% block contenido %}
+    <br><br>
+    <h4>Apellido y Nombre: {{object}}</h4>
+    
+    <p>Nacionalidad: {{object.nac}} </p> 
+    <p>Fecha de Nacimiento: {{object.birth_date}} </p>
+
+    <p>Sus películas: </p>
+            {% for movies in object.movies_set.all %}
+            <li> <a href="{% url 'Detalles' movies.id %}">{{movies}}</a></li><br>
+            {% endfor %}
+                  
+    <br><br>
+    <a href='{% url "Directorslist" %}'> Regresar </a>
+
+    {% endblock contenido %}

@@ -1,6 +1,7 @@
+from xmlrpc.client import NOT_WELLFORMED_ERROR
 from django.http import HttpResponse
-from .forms import MoviesForm, CinemaForm, UserRegisterForm, UserEditForm
-from .models import Blogs, Movies, Cinemas
+from .forms import ActorsForm, MoviesForm, CinemaForm, UserRegisterForm, UserEditForm, DirectorsForm
+from .models import Blogs, Movies, Cinemas, Actors, Directors, Avatar
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -11,20 +12,54 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy 
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin, PermissionRequiredMixin
-
+from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin, PermissionRequiredMixin, UserPassesTestMixin
+from datetime import datetime
 
 # Create your views here.
 
-# INICIO --
-def index (request):
-    return render(request,"index.html")
+# INDEX
+def index(request):
+    if request.user.is_authenticated:
+        avatar = Avatar.objects.get(user=request.user.id)
+        return render(request,"index.html",{"avatar":avatar})
+    else:
+        return render(request,"index.html")
 
-#Movies (ViewList / Seek / )
+def about (request):
+    return render(request,"about-us.html")
+#MOVIES [LIST - CRUD - DETAIL - SEEK&FIND ]
 
-def allmovieslist (request):
-    movies = Movies.objects.all().order_by('name')
-    return render(request,"all-movies-list.html",{'movies':movies})
+class Allmovieslist (ListView):
+    model = Movies
+    template_name = "all-movies-list.html"
+    
+    def get_queryset(self):
+        return Movies.objects.order_by('name')
+
+class CreationmovieForm(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Movies
+    template_name = "creation-movies-form.html"
+    permission_required = 'cineproyecto.add_movies'
+    success_url = "/cineproyecto/all-movies-list"
+    # fields = ['name','dir','act','date']
+    form_class = MoviesForm
+
+class DeleteMovie(LoginRequiredMixin, PermissionRequiredMixin, DeleteView ):
+    model = Movies
+    permission_required = 'cineproyecto.delete_movies'
+    template_name = 'confirm-delete-movies.html'
+    success_url = "/cineproyecto/all-movies-list"
+
+class UpdateMovies(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Movies
+    permission_required = 'cineproyecto.change_movies'
+    template_name = "update-movies.html"
+    success_url = "/cineproyecto/all-movies-list"
+    form_class = MoviesForm
+
+class DetailMovies(LoginRequiredMixin, DetailView):
+    model = Movies
+    template_name = "detail-movie.html"
 
 def seekermovie (request):
     return render(request,"seeker-movie.html")
@@ -37,18 +72,7 @@ def findmovieget (request):
     else:
          return render(request,"find-movie-get-else.html")
 
-def creationmoviesForm(request):
-    if request.method == "POST":
-        myform = MoviesForm(request.POST)
-        if myform.is_valid:
-            print(myform)
-            movie_info = myform.cleaned_data        
-            movie = Movies (name=movie_info["Nombre"],dir=movie_info["Director"],act=movie_info["Actor"],date=movie_info["Fecha"])
-            movie.save()
-            return render(request,"success-movie-created.html")
-    else:
-        myform = MoviesForm()
-    return render (request,"creation-movies-form.html",{"myform":myform})
+
 #Cinemas
 
 def allcinemalist (request):
@@ -80,7 +104,72 @@ def creationcinemaForm(request):
         myform = CinemaForm()
         return render (request,"creation-cinema-form.html",{"myform":myform})
 
-#Estrellas
+#STARS [LIST - CRUD - DETAIL - SEEK&FIND ]
+
+class Allactorslist (ListView):
+    model = Actors
+    template_name = "all-actors-list.html"
+    
+    def get_queryset(self):
+        return Actors.objects.order_by('surname')
+
+class CreationActorForm(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Actors
+    template_name = "creation-actors-form.html"
+    permission_required = 'cineproyecto.add_actors'
+    success_url = "/cineproyecto/all-actors-list"
+    # fields = ['name','dir','act','date']
+    form_class = ActorsForm
+
+class DeleteActors (LoginRequiredMixin, PermissionRequiredMixin, DeleteView ):
+    model = Actors
+    permission_required = 'cineproyecto.delete_actors'
+    template_name = 'confirm-delete-actors.html'
+    success_url = "/cineproyecto/all-actors-list"
+
+class UpdateActors (LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Actors
+    permission_required = 'cineproyecto.change_actors'
+    template_name = "update-actors.html"
+    success_url = "/cineproyecto/all-actors-list"
+    fields = ['name','surname','nac','birth_date']
+
+class DetailActors(LoginRequiredMixin, DetailView):
+    model = Actors
+    template_name = "detail-actor.html"
+    
+class Alldirectorslist (ListView):
+    model = Directors
+    template_name = "all-directors-list.html"
+
+class CreationDirectorForm(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Directors
+    template_name = "creation-directors-form.html"
+    permission_required = 'cineproyecto.add_directors'
+    success_url = "/cineproyecto/all-director-list"
+    # fields = ['name','dir','act','date']
+    form_class = DirectorsForm
+
+class DeleteDirectors (LoginRequiredMixin, PermissionRequiredMixin, DeleteView ):
+    model = Directors
+    permission_required = 'cineproyecto.delete_directors'
+    template_name = 'confirm-delete-directors.html'
+    success_url = "/cineproyecto/all-directors-list"
+
+class UpdateDirectors (LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Directors
+    permission_required = 'cineproyecto.change_directors'
+    template_name = "update-directors.html"
+    success_url = "/cineproyecto/all-directors-list"
+    fields = ['name','surname','nac','birth_date']
+
+class DetailDirectors(LoginRequiredMixin, DetailView):
+    model = Directors
+    template_name = "detail-director.html"
+    
+    def get_queryset(self):
+        return Directors.objects.order_by('surname')
+
 def busqueda_actores(request):
     return render(request, "busqueda_actores.html")
 
@@ -96,60 +185,48 @@ def buscar(request):
 
     return HttpResponse(mensaje)
 
-#Blogs
+#BLOGS [LIST - CREATE]
 
-class BlogsCreation(CreateView):
+class Allbloglist (ListView):
+    model = Blogs
+    template_name = "all-blogs-list.html"
+    
+    def get_queryset(self):
+        return Blogs.objects.order_by('date')
+
+    def get_context_data(self,**kwargs):
+        context = super(Allbloglist,self).get_context_data(**kwargs)
+        context['lastblogs'] = Blogs.objects.filter(aprove=True).order_by("-date")[:3]
+        return context
+
+# def last_3_blogs(request):
+#     last_3_blog = Blogs.objects.filter(aprove=True).order_by("-date")[:3]
+#     return render (request, "all-blogs-recent.html",{"last_3_blog":last_3_blog})
+
+class BlogsCreation(LoginRequiredMixin, CreateView):
     model = Blogs
     template_name = "creation-blogs-form.html"
     success_url = reverse_lazy("Inicio")
-    fields = ["title","subtitle","body","date","author"]
+    fields = ["title","subtitle","body","img"]
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.date = datetime.now() 
+        return super(BlogsCreation, self).form_valid(form)
       
 def register(request):
     if request.method == "POST":
         form= UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data["username"]
-            messages.success(request, f"Usuario {username} creado")
+            # username = form.cleaned_data["username"]
+            # messages.success(request, f"Usuario {username} creado")
             return ("Inicio")
     else:
         form= UserRegisterForm()
 
     context= {"form":form}
     return render(request, "register.html", context)
-
-class Allmovieslist (ListView):
-    model = Movies
-    template_name = "all-movies-list.html"
-    
-    def get_queryset(self):
-        return Movies.objects.order_by('name')
-
-
-class CreationmovieForm(CreateView):
-    model = Movies
-    template_name = "creation-movies-form.html"
-    success_url = "/cineproyecto/all-movies-list"
-    fields = ['name','dir','act','date']
-
-
-class DeleteMovie(DeleteView, LoginRequiredMixin):
-    model = Movies
-    template_name = 'confirm-delete-movies.html'
-    success_url = "/cineproyecto/all-movies-list"
-
-
-class UpdateMovies(UpdateView):
-    model = Movies
-    template_name = "update-movies.html"
-    success_url = "/cineproyecto/all-movies-list"
-    fields = ['name','dir','act','date']
-
-class DetailMovies(DetailView):
-    model = Movies
-    template_name = "detail-movie.html"
-
 
 class Allcinemalist (ListView):
     model = Cinemas
@@ -168,6 +245,7 @@ def edit_user(request):
             usuario.email = data["email"]
             usuario.password1 = data["password1"]
             usuario.password2 = data["password2"]
+            usuario.avatar.img = data["img"]
             usuario.save()
 
             username = form.cleaned_data["username"]
@@ -241,5 +319,16 @@ def edit_user(request):
 
 #     return render (request, "login.html", {"form":form} ) 
     
-
+# def creationmoviesForm(request):
+#     if request.method == "POST":
+#         myform = MoviesForm(request.POST)
+#         if myform.is_valid:
+#             print(myform)
+#             movie_info = myform.cleaned_data        
+#             movie = Movies (name=movie_info["Nombre"],dir=movie_info["Director"],act=movie_info["Actor"],date=movie_info["Fecha"])
+#             movie.save()
+#             return render(request,"success-movie-created.html")
+#     else:
+#         myform = MoviesForm()
+#     return render (request,"creation-movies-form.html",{"myform":myform})
 

@@ -1,0 +1,51 @@
+{% extends 'main-template.html' %}
+
+{% block contenido %}
+<div class="tail-top">
+  <div class="tail-bottom">
+    <div id="main">
+      <div id="content">
+        <div class="line-hor"></div>
+        <div class="box">
+          <div class="border-right">
+            <div class="border-left">
+              <div class="inner">
+                <a href='{% url "CrearBlog" %}'>Crear nueva entrada </a> &emsp;
+               
+                <h3>Entradas <span>Recientes</span></h3>
+                            
+                <p>Cada miembro de nuestra comunidad aporta su mirada de las novedades, comentarios y experiencias del mundo del Cine. Sumate con tu aporte!.</p>
+                
+                  <ul class="list">
+                
+                    {% for last in lastblogs %}
+        
+                      <li><img src="images/3page-img1.jpg" alt="" /><a href="article.html">{{last.title}}</a><br />
+                      {{last.subtitle}} by {{last.author}}.</li>
+                    
+                    {% endfor %}
+                                
+              </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="content">
+          <h3>Todos Nuestros <span>Blogs</span></h3>
+          <ul>
+
+            {% for blog in object_list %}
+
+            <li>{{blog.title}} by {{blog.author}} -- {{blog.date}}</li>
+          
+            {% endfor %}
+            
+          </ul>
+        </div>
+      </div>
+     </div>
+  </div>
+</div>
+ {% endblock contenido%}

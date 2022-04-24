@@ -21,7 +21,7 @@
 
     {% endif %}
 
-    <form action="/cineproyecto/edit_user/" method="POST">{% csrf_token %}
+    <form action="/cineproyecto/edit_user/" method="POST"> {% csrf_token %}
 
         <h4> Hola {{user}}, modificá tus datos e ingresa tu contraseña para confirmar:</h4>
         <!-- Acta está la relacion de Formulario de DJANGO reemplazando a el HTML Form-->

@@ -18,12 +18,12 @@
                       <div class="image png"></div>
                       <div class="inside">
                         {% if request.user.is_authenticated %}
-                          <h4> Hola {{user.username}}</h4>
+                                    <h4> ¡Bienvenido {{user.first_name}} ({{user.username}})! </h4>
                         {% endif  %}
                    
                         <h2>Tu Web de Cine<span>Te está esperando</span></h2>
                         <p>Todas las novedades y las películas que te gustan en un solo lugar. Sumate.</p>
-                        <div class="wrapper"><a href="#" class="link1"><span><span>Mirá Más</span></span></a></div>
+                        <div class="wrapper"><a href="{% url 'About' %}" class="link1"><span><span>Mirá Más</span></span></a></div>
                       </div>
                     </div>        
                   </div>
@@ -33,9 +33,8 @@
                     <div class="border-right">
                         <div class="border-left">
                             <div class="inner">
-                                <h3>Welcome to <b>Cinema</b> <span>Center</span></h3>
-                                <p>Felitsed vel inte vivamus ant sed sapientesque ero id auctor tincidunt. Enimin ulla mi et nibh turien augue habitudin platea sed orci. Intedonec quis sed condis donec urna lacilis leo quismodo wisi quis.</p>
-                                    <div class="img-box1"><img src="{% static 'cineproyecto/images/1page-img1.jpg' %}" alt="" />Fauctororci cursuspendrerisque ipsum elit congue nibh proin nulla eu urna et. Tordolorem metus fringilla sem facinia sapien in in malesuada vitae quismodo. Ipsumut tellentegest nunc pede id sem gravida natis justo maecenas eu. </div>
+                                <h3>Bienvenido a <b>Cinema</b> <span>Center</span></h3> 
+                                    <div class="img-box1"><img src="{% static 'cineproyecto/images/1page-img5.jpg' %}" style= "max-width:25%; height:auto;" />Fauctororci cursuspendrerisque ipsum elit congue nibh proin nulla eu urna et. Tordolorem metus fringilla sem facinia sapien in in malesuada vitae quismodo. Ipsumut tellentegest nunc pede id sem gravida natis justo maecenas eu. </div>
                                     <p>Doneccursus et amet a mattitor condisse laoreet accum wisis sapibulum orci. Cursuscondimentum dolorem pulvinare lacus amet commod tincidunt tellus quisque donec natibus.</p>
                                     </div>
                             </div>

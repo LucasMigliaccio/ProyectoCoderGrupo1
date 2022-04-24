@@ -1,0 +1,11 @@
+{% extends 'main-template2.html' %}
+{% block contenido%}
+<br><br>
+    <form method="POST"> {% csrf_token %}
+       {{ form.as_p }}
+
+       <input type="submit" value="Editar"> &emsp;
+       <a href='{% url "Directorslist" %}' color="black">Regresar </a> &emsp; 
+    </form> 
+<br><br>
+{% endblock contenido%}

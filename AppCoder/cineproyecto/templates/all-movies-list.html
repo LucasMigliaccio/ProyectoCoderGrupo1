@@ -13,17 +13,19 @@
                       <div class="border-right">
                         <div class="border-left">
                           <div class="inner">
-                
-                        <a href='{% url "Peliculas" %}' color="black">Crear nueva película </a> &emsp; 
-                        <a href='{% url "BusquedaPelicula" %}'>Buscar película </a> &emsp; 
-                        <br><br><br>
+                            {% if request.user.is_staff %}
+                            <a href='{% url "Peliculas" %}' color="black">Crear nueva película </a> &emsp; 
+                            {% endif  %}
+                            <a href='{% url "BusquedaPelicula" %}'>Buscar película </a> &emsp; 
+                            <br><br><br>
+                            <h4> Peliculas Registradas </h4>
                         {% for movie in object_list%}
                             <li>
                                 {{movie}} &emsp;
                                 <a href='{% url "Detalles" movie.id %}'> Detalles </a> &nbsp;
-                                {% if request.user.is_authenticated %}
-                                    <a href='{% url "Edit" movie.id %}'> Editar </a> &nbsp;
-                                    <a href='{% url "Borrar" movie.id %}'> Eliminar </a> &nbsp;
+                                {% if request.user.is_staff %}
+                                <a href='{% url "Edit" movie.id %}'> Editar </a> &nbsp;
+                                <a href='{% url "Borrar" movie.id %}'> Eliminar </a> &nbsp;
                                 {% endif  %}
                                 
                                 

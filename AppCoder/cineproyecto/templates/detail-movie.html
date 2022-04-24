@@ -1,12 +1,26 @@
-{% extends 'main-template.html' %}
+{% extends 'main-template2.html' %}
 
     {% block contenido %}
         <br><br>
-        Título: {{object.name}}<br>
-        Director: {{object.dir}}<br>
-        Actor: {{object.act}}<br>
-        Año de lanzamiento: {{object.date}}
+        <h4>Título: {{object.name}}</h4>
+        Director/es: 
+                {% for director in object.dir.all %}
+                    <li> <a href="{% url 'DetallesDir' director.id %}">{{director}}</a></li><br>
+                {% endfor %}
+        Actor/es:
+                {% for actor in object.act.all %}
+                    <li> <a href="{% url 'DetallesAct' actor.id %}"> {{actor }}</a> </li>
+                {% endfor %}
+                <br>
+       Fecha de estreno: {{object.date}}
 
+       <br><br>
+
+        <div>
+
+            <iframe width="500" height="300" src="{{object.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+        </div>
 
 
 

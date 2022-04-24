@@ -1,0 +1,55 @@
+{% extends 'main-template.html' %}
+    {% block contenido %}
+
+    <body>
+
+        
+    <div class="tail-top">
+        <div class="tail-bottom">
+            <div id="main">
+                <div id="content">
+                    <div class="line-hor"></div>
+                    <div class="box">
+                      <div class="border-right">
+                        <div class="border-left">
+                          <div class="inner">
+                        <a href="{% url 'Actorslist' %}"> ACTORES </a> &emsp; 
+                        <a href="{% url 'Directorslist' %}"> DIRECTORES </a>
+                        <BR></BR>
+                                      
+                        <a href='{% url "Directores" %}' color="black">Crear nuevo director </a> &emsp; 
+                        <a href='{% url "BusquedaActores" %}'>Buscar director </a> &emsp; 
+                        <br><br><br>
+
+                        <h4> Directores Registrados </h4>
+                        {% for director in object_list%}
+                            <li>
+                                {{director}} &emsp;
+                                <a href='{% url "DetallesDir" director.id %}'> Detalles </a> &nbsp;
+                                {% if request.user.is_staff %}
+                                <a href='{% url "EditDir" director.id %}'> Editar </a> &nbsp;
+                                <a href='{% url "BorrarDir" director.id %}'> Eliminar </a> &nbsp;
+                                {% endif  %}
+                                
+                                
+                                
+                                
+                            </li>
+                        {% endfor %}
+                        
+                         <!-- <h3> Películas del site </h3>
+        
+                         {% for movie in movies %}
+                         <li>{{movie.name}}   -   {{movie.dir}}   -   {{movie.act}}   -   {{movie.date}}</li>
+                         {% endfor %} -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    </body>
+    {% endblock contenido %}
