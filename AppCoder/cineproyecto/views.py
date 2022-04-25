@@ -132,7 +132,7 @@ class UpdateActors (LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = 'cineproyecto.change_actors'
     template_name = "update-actors.html"
     success_url = "/cineproyecto/all-actors-list"
-    fields = ['name','surname','nac','birth_date']
+    form_class = ActorsForm
 
 class DetailActors(LoginRequiredMixin, DetailView):
     model = Actors
@@ -154,14 +154,14 @@ class DeleteDirectors (LoginRequiredMixin, PermissionRequiredMixin, DeleteView )
     model = Directors
     permission_required = 'cineproyecto.delete_directors'
     template_name = 'confirm-delete-directors.html'
-    success_url = "/cineproyecto/all-directors-list"
+    success_url = "/cineproyecto/all-director-list"
 
 class UpdateDirectors (LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Directors
     permission_required = 'cineproyecto.change_directors'
     template_name = "update-directors.html"
-    success_url = "/cineproyecto/all-directors-list"
-    fields = ['name','surname','nac','birth_date']
+    success_url = "/cineproyecto/all-director-list"
+    form_class = DirectorsForm
 
 class DetailDirectors(LoginRequiredMixin, DetailView):
     model = Directors
@@ -199,9 +199,9 @@ class Allbloglist (ListView):
         context['lastblogs'] = Blogs.objects.filter(aprove=True).order_by("-date")[:3]
         return context
 
-# def last_3_blogs(request):
-#     last_3_blog = Blogs.objects.filter(aprove=True).order_by("-date")[:3]
-#     return render (request, "all-blogs-recent.html",{"last_3_blog":last_3_blog})
+class BlogsDetail (DetailView):
+    model= Blogs
+    template_name = "detail-blog.html"
 
 class BlogsCreation(LoginRequiredMixin, CreateView):
     model = Blogs
@@ -213,6 +213,25 @@ class BlogsCreation(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         form.instance.date = datetime.now() 
         return super(BlogsCreation, self).form_valid(form)
+
+class BlogsAprove(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Blogs
+    template_name = "update-blogs.html"
+    permission_required = 'cineproyecto.change_blogs'
+    success_url = reverse_lazy("Inicio")
+    fields = ["title","subtitle","body","aprove"]
+
+@staff_member_required
+def aproveblog(request):
+    toaprove = Blogs.objects.filter(aprove=False).order_by("-date")
+    return render (request, "all-blogs-toaprove.html", {"blog_toaprove":toaprove})
+  
+
+class BlogsDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView ):
+    model = Directors
+    permission_required = 'cineproyecto.delete_blogs'
+    template_name = 'confirm-delete-blogs.html'
+    success_url = "/cineproyecto/pages"
       
 def register(request):
     if request.method == "POST":

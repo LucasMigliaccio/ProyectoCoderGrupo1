@@ -8,7 +8,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 #-----------------------------------
 
-from .views import DeleteDirectors, DetailDirectors, UpdateDirectors, DeleteDirectors, CreationDirectorForm, about, CreationActorForm, DeleteActors, UpdateActors, DetailActors, Alldirectorslist, Allactorslist, Allbloglist, busqueda_actores, buscar, register, edit_user, BlogsCreation, DetailMovies, UpdateMovies, DeleteMovie, CreationmovieForm, Allmovieslist, Allcinemalist, creationcinemaForm, findcinemaget, findmovieget, index, seekercinema, seekermovie 
+from .views import aproveblog, BlogsDelete, BlogsAprove, BlogsDetail, DeleteDirectors, DetailDirectors, UpdateDirectors, DeleteDirectors, CreationDirectorForm, about, CreationActorForm, DeleteActors, UpdateActors, DetailActors, Alldirectorslist, Allactorslist, Allbloglist, busqueda_actores, buscar, register, edit_user, BlogsCreation, DetailMovies, UpdateMovies, DeleteMovie, CreationmovieForm, Allmovieslist, Allcinemalist, creationcinemaForm, findcinemaget, findmovieget, index, seekercinema, seekermovie 
  
 urlpatterns = [
     path('',index, name="Inicio"),
@@ -35,6 +35,10 @@ urlpatterns = [
     #path('creation-user-form/', creationuserForm, name="FormularioUsuario"),
     path('creation-cinema-form/',creationcinemaForm, name="FormularioCine"),
     path('creation-blog', BlogsCreation.as_view(),name="CrearBlog"),
+    path('detail-blog/<pk>', BlogsDetail.as_view(),name="DetalleBlog"),
+    path('delete-blog/<pk>', BlogsDelete.as_view(),name="BorrarBlog"),
+    path('update-blog/<pk>', BlogsAprove.as_view(),name="EditarBlog"),
+    path('aprove-blog', aproveblog, name="AproveBlog"),
     path('seeker-movie/', seekermovie, name="BusquedaPelicula"),
     path('seeker-cinema/', seekercinema, name="Findcinema"),
     path('busqueda_actores/', busqueda_actores, name= 'BusquedaActores'),

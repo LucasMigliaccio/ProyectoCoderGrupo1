@@ -1,4 +1,6 @@
+from datetime import date
 from mailbox import Mailbox
+from tkinter import Widget
 from tkinter.tix import Select
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -9,17 +11,62 @@ from .models import Movies, Actors, Directors
 class MoviesForm(forms.ModelForm):
     class Meta:
         model = Movies
-        fields = ["name","act","dir","date","link"]
+        fields = ("name","act","dir","date","link")
+        widgets = {
+            'date': forms.DateInput(
+                attrs={
+                    "type":"date"
+                }
+            )
+        }
 
 class ActorsForm(forms.ModelForm):
     class Meta:
         model = Actors
         fields = ["name","surname","nac","birth_date"]
+        widgets = {
+                'birth_date': forms.DateInput(
+                    attrs={
+                        "type":"date"
+                    }
+                )
+            }
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+        if(name[0] != name[0].upper()):
+            return name.capitalize()
+        else:
+            return name
+    def clean_surname(self):
+        surname = self.cleaned_data["surname"]
+        if(surname[0] != surname[0].upper()):
+            return surname.capitalize()
+        else:
+            return surname
 
 class DirectorsForm(forms.ModelForm):
     class Meta:
         model = Directors
         fields = ["name","surname","nac","birth_date"]
+        widgets = {
+                'birth_date': forms.DateInput(
+                    attrs={
+                        "type":"date"
+                    }
+                )
+            }
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+        if(name[0] != name[0].upper()):
+            return name.capitalize()
+        else:
+            return name
+    def clean_surname(self):
+        surname = self.cleaned_data["surname"]
+        if(surname[0] != surname[0].upper()):
+            return surname.capitalize()
+        else:
+            return surname
                   
 # -- Eliminamos Form User -- 
 # class UserForm(forms.Form):

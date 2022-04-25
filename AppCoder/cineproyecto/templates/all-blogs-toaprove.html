@@ -1,0 +1,37 @@
+{% extends 'main-template.html' %}
+
+{% block contenido %}
+<div class="tail-top">
+  <div class="tail-bottom">
+    <div id="main">
+      <div id="content">
+        <div class="line-hor"></div>
+        <div class="box">
+          <div class="border-right">
+            <div class="border-left">
+              <div class="inner">
+                <a href='{% url "CrearBlog" %}'>Crear nueva entrada </a> &emsp;
+                {% if request.user.is_staff %}
+
+                <a href='{% url "AproveBlog" %}'>Pendientes Aprobación </a> &emsp;
+                
+                {% endif %}
+                <h3>Para Aprobar <span>Blogs</span></h3>
+               
+                {% for blog in blog_toaprove %}
+
+                  <li> <a href='{% url "EditarBlog" blog.id %}'>{{blog.title}} by {{blog.author}} </a></li>
+                  
+                  {% endfor %}
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+              </div>
+     </div>
+  </div>
+</div>
+ {% endblock contenido%}

@@ -1,6 +1,7 @@
 {% extends 'main-template.html' %}
 
 {% block contenido %}
+
 <div class="tail-top">
   <div class="tail-bottom">
     <div id="main">
@@ -11,7 +12,9 @@
             <div class="border-left">
               <div class="inner">
                 <a href='{% url "CrearBlog" %}'>Crear nueva entrada </a> &emsp;
-               
+                {% if request.user.is_staff %}
+                  <a href='{% url "AproveBlog" %}'>Pendientes Aprobación </a> &emsp;
+                {% endif %}
                 <h3>Entradas <span>Recientes</span></h3>
                             
                 <p>Cada miembro de nuestra comunidad aporta su mirada de las novedades, comentarios y experiencias del mundo del Cine. Sumate con tu aporte!.</p>
@@ -20,29 +23,35 @@
                 
                     {% for last in lastblogs %}
         
-                      <li><img src="images/3page-img1.jpg" alt="" /><a href="article.html">{{last.title}}</a><br />
-                      {{last.subtitle}} by {{last.author}}.</li>
+                      <li><img src="{{last.img.url}}" style= "max-width:20%; height:auto;" /><a href='{% url "DetalleBlog" last.id %}'>{{last.title}}</a><br />
+                      {{last.subtitle}} by {{last.author}}. ({{last.date}})</li>
                     
                     {% endfor %}
-                                
-              </div>
+
+                  </div>
+                  
+                </div>
               </ul>
             </div>
           </div>
         </div>
-        
 
         <div class="content">
           <h3>Todos Nuestros <span>Blogs</span></h3>
           <ul>
 
             {% for blog in object_list %}
+              {% if blog.aprove == True %}
 
-            <li>{{blog.title}} by {{blog.author}} -- {{blog.date}}</li>
-          
+              <li>{{blog.title}} by {{blog.author}} -- {{blog.date}} &emsp;
+              <a href='{% url "DetalleBlog" blog.id %}'> Detalles </a>
+              </li>
+
+              {% endif %}
             {% endfor %}
             
           </ul>
+          <br><br>
         </div>
       </div>
      </div>

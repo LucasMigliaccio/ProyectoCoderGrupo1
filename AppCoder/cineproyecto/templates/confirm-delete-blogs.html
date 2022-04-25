@@ -1,0 +1,9 @@
+{% extends 'main-template2.html' %}<!DOCTYPE html>
+{% block contenido %}
+
+    <form method = "POST">{% csrf_token %}
+            ¿Estás seguro que quieres eliminar la entrada {{object}}?
+            <input type="submit" value="Eliminar">
+
+    </form>
+{% endblock contenido %}
