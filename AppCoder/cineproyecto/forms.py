@@ -94,9 +94,23 @@ class UserRegisterForm(UserCreationForm):
     password1= forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2= forms.CharField(label=" Repetir Contraseña", widget=forms.PasswordInput)
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data["first_name"]
+        if(first_name[0] != first_name[0].upper()):
+            return first_name.capitalize()
+        else:
+            return first_name
+    def clean_last_name(self):
+        last_name = self.cleaned_data["last_name"]
+        if(last_name[0] != last_name[0].upper()):
+            return last_name.capitalize()
+        else:
+            return last_name
+    
+
     class Meta:
         model= User
-        fields = ["username", "email", "password1", "password2"]
+        fields = ["username", "email", "password1", "password2","first_name","last_name"]
         help_texts= {k: "" for k in fields}
 
 class UserEditForm(UserCreationForm):

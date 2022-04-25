@@ -7,7 +7,7 @@
         
                 {% for movie in movies %}
               
-                    <li>{{movie}}</li>
+                    <li>{{movie}}  <a href='{% url "Detalles" movie.id %}'> Detalles </a> &nbsp;</li>
                 
                 {% endfor %}
     <br><br>

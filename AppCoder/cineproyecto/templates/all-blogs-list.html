@@ -44,7 +44,10 @@
               {% if blog.aprove == True %}
 
               <li>{{blog.title}} by {{blog.author}} -- {{blog.date}} &emsp;
-              <a href='{% url "DetalleBlog" blog.id %}'> Detalles </a>
+              <a href='{% url "DetalleBlog" blog.id %}'> Detalles </a>&emsp;
+              {% if request.user.is_staff %}
+              <a href='{% url "BorrarBlog" blog.id %}'> Eliminar </a>
+              {% endif %}
               </li>
 
               {% endif %}

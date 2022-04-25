@@ -237,10 +237,13 @@ def register(request):
     if request.method == "POST":
         form= UserRegisterForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data["username"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
             form.save()
             # username = form.cleaned_data["username"]
             # messages.success(request, f"Usuario {username} creado")
-            return ("Inicio")
+            return render (request,"index.html")
     else:
         form= UserRegisterForm()
 

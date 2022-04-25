@@ -29,7 +29,7 @@
           <ul>
             <li><a href="{% url 'Inicio' %}"><img src="{% static 'cineproyecto/images/home.png' %}" alt="" /></a></li>
             {% if request.user.is_authenticated %}
-            <li><a href="{% url 'EditUser' %}"><img src="{{ avatar.picture.url }}" style= "max-width:15%; height:auto;" /> {{user.</a></li>
+            <li><a href="{% url 'EditUser' %}"><img src="{{ avatar.picture.url }}" style= "max-width:15%; height:auto;" /> </a></li>
             <li><a href="{% url 'logout' %}"><img src="{% static 'cineproyecto/images/logout_.png' %}" alt="" /></a></li>
             {% else %}
             <li><a href="{% url 'login' %}"><img src="{% static 'cineproyecto/images/perfilm.png' %}" alt="" /></a></li>

@@ -83,7 +83,7 @@ class Blogs(models.Model):
     date = models.DateField("Creación")
     img = models.ImageField(verbose_name="Imagen", upload_to='img/', height_field=None, width_field=None, max_length=100, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    aprove = models.BooleanField(default="False")
+    aprove = models.BooleanField(default="False",verbose_name="Aprobar")
 
     def __str__(self) -> str:
         return f"{self.title} ({self.date})" 
