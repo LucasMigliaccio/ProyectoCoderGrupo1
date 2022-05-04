@@ -9,7 +9,7 @@
 
         <p>Sus películas: </p>
                 {% for movies in object.movies_set.all %}
-                <li> <a href="{% url 'Detalles' movies.id %}">{{movies}}</a></li><br>
+                <li> <a href="{% url 'MovieDetail' movies.id %}">{{movies}}</a></li><br>
                 {% endfor %}
                       
         <br><br>

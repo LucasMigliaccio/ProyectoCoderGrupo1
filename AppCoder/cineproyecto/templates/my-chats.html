@@ -1,0 +1,20 @@
+{% extends 'main-template2.html' %}
+    {% block contenido %}
+    
+    Mis chats
+    (listado de chats)<br><br><br>
+
+
+    Chateá con otros usuarios:
+
+    {% for usuario in usuarios %}
+        {% if not usuario == request.user %}
+            {{usuario}}<br>
+        {% endif %}
+    
+
+    {% endfor %}
+
+
+
+    {% endblock contenido%}

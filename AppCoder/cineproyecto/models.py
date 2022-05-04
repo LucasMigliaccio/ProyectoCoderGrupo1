@@ -1,20 +1,13 @@
+from email.policy import default
 from tkinter import CASCADE, Widget
 from django.db import models
 from stat import FILE_ATTRIBUTE_DIRECTORY
 from django.forms import CharField, PasswordInput
-from datetime import datetime, date
+from datetime import *
 from django.contrib.auth.models import User
+import uuid
+from django.db.models import Count
 
-# Create your models here.
-
-# class Users(models.Model):
-#     name = models.CharField("Nombre",max_length=30)
-#     surname = models.CharField("Apellido",max_length=30)
-#     user_name = models.CharField("Nombre_de_usuario",unique=True,max_length=30)
-#     password = models.CharField("Contraseña", max_length=30)
-#     mail = models.EmailField("Email")
-#     birth_date = models.DateField("Fecha_de_Nacimiento")
-#     other_info = models.CharField("Otros_datos",max_length=30)
     
 class Cinemas(models.Model):
     name = models.CharField("Nombre",max_length=30)
@@ -23,6 +16,9 @@ class Cinemas(models.Model):
     mail = models.EmailField("Mail")
     phone = models.CharField("Telefono",max_length=20)
     other_info = models.CharField("Otros datos",max_length=30)
+
+    def __str__(self) -> str:
+        return f"{self.name}" 
 
     class Meta:
         verbose_name = "Sala"
@@ -59,8 +55,6 @@ class Directors(models.Model):
     
 class Movies(models.Model):
     name = models.CharField("Título",max_length=30)
-    # dir = models.CharField("Director",max_length=30)
-    # act = models.CharField("ActorPrincipal",max_length=30)
     date = models.DateField("Fecha de Lanzamiento")
     act = models.ManyToManyField(Actors, verbose_name="Actores")
     dir = models.ManyToManyField(Directors, verbose_name="Director")
@@ -99,3 +93,14 @@ class Avatar(models.Model):
     
     def __str__(self) -> str:
         return f"Avatar de {self.user}" 
+
+class ThreadModel(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+	receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+
+class MessageModel(models.Model):
+	thread = models.ForeignKey('ThreadModel', related_name='+', on_delete=models.CASCADE, blank=True, null=True)
+	sender_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+	receiver_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='+')
+	body = models.CharField(max_length=1000)
+	is_read = models.BooleanField(default=False)

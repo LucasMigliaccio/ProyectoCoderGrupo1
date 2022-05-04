@@ -1,7 +1,17 @@
 {% extends 'main-template.html' %}
 
     {% block contenido %}
-
-        <h3> Nombre no cargado, intertar nuevamente</h3>
+    {% if request.user.is_staff %}
+    <br>
+    <a href='{% url "Cinemas" %}' color="black">Crear nuevo cine </a> &emsp; 
+    {% endif  %}
+    <a href='{% url "FindCinema" %}'>Buscar cine </a> &emsp; 
+    <br><br><br>
+        <h4> Nombre no cargado, intertar nuevamente</h4>
         
     {% endblock contenido%}
+
+
+
+
+    

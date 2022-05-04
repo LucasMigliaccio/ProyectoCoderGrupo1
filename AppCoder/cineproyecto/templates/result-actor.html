@@ -1,0 +1,24 @@
+{% extends 'main-template2.html' %}
+    {% block contenido %}
+    <br><br>
+    {% if request.user.is_staff %}
+    <a href='{% url "Actors" %}'>Crear nuevo actor </a> &emsp;
+    {% endif %}
+    <a href='{% url "FindActor" %}'>Buscar actor </a> &emsp;
+    {% if actors %}
+        <p>Busqueda: {{ name }} </p>
+        <p>Resultados según nombre, apellido y nacionalidad</p>
+        <p>Actores encontrados: {{actors|length}} </p>
+        
+                {% for actor in actors %}
+              
+                    <li> {{actor}}  <a href='{% url "ActorDetail" actor.id %}'> Detalles </a> &nbsp;</li>
+                
+                {% endfor %}
+    {% else %}
+        <p> No se encontraron actores con el nombre: {{name}} </p>
+    {% endif %}
+        <br><br>
+    {% endblock contenido %}
+</body>
+</html>

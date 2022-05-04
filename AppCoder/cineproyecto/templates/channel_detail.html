@@ -1,0 +1,129 @@
+
+{% extends 'main-template.html' %}
+    <META HTTP-EQUIV=”refresh” CONTENT=”15″>
+
+    {% block contenido %}
+    <div class="tail-top">
+        <div class="tail-bottom">
+            <div id="main">
+                <div id="content">
+                    <div class="line-hor"></div>
+                    <div class="box">
+                      <div class="border-right">
+                        <div class="border-left">
+                          <div  class="inner">     
+                        </style>
+
+
+                        <h6>Identificador del canal: {{object.id}}</h6><br>
+                    
+                        <h1>Mensajes del canal</h1>
+                            <div id="contenedor_ms">
+                            <br>    
+                            {% for mensaje in object.messagechannel_set.all %}	
+                                {% if request.user == mensaje.usuario %}
+                               
+                                <p>
+                                    
+                                    <strong>
+                                        {{mensaje.text}}
+                                    </strong>
+                                    <span>
+                                        enviaste...
+                                    </span>
+
+                                </p>
+                                {% else %} 
+                                    <p>
+                                    
+                                        
+                                        <strong>{{mensaje.text}}</strong>
+                                        <span>
+                                            {{mensaje.usuario}}
+                                        </span>
+                                        
+                                    </p>
+                            
+                                {% endif %}
+                             
+                    
+                            {% endfor %}
+                            </div>
+                       
+                        <h1> Usuarios en el canal</h1>
+                        {% for usuarios in object.userchannel_set.all %}
+                                <p>
+                                    {{usuarios.usuario}}
+                                </p>    
+                    
+                        {% endfor %}
+                        
+                        <form id="form_submit" action="{{ request.path }}" method="post">
+
+                            {% csrf_token %}
+
+                            {{form.as_p}}
+                            
+                            <button type="submit">
+                                Enviar
+                            </button>
+                        </form>
+
+                        <script>
+                    
+                                const MsgForm = document.getElementById("form_submit")
+                                const msgContainer = document.getElementById("contenedor_ms")
+                            
+                            
+                                MsgForm.addEventListener("submit", (event) => {
+                            
+                                    event.preventDefault()
+                            
+                                    const  targetDate = event.target 
+                                    const formData = new FormData(targetDate)
+                            
+                                    const xhr = new XMLHttpRequest() 
+                            
+                            
+                                    const endpoint = MsgForm.getAttribute("action")
+                                    const method = MsgForm.getAttribute("method")
+                                    xhr.open(method, endpoint)
+                            
+                                    xhr.responseType = 'json'
+                            
+                                    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+                                    xhr.setRequestHeader("x-requested-with", "XMLHttpRequest")
+                            
+                                    xhr.onload = () =>{
+                            
+                                        console.log(xhr.status, xhr.response)
+                            
+                            
+                                    }
+                            
+                                    xhr.send(formData)
+                            
+                            
+                                })
+                            
+                        
+                        
+                        </script>
+                        
+                          </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+    
+
+
+
+    {% endblock contenido%}
+
+

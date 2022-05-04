@@ -5,11 +5,11 @@
         <h4>Título: {{object.name}}</h4>
         Director/es: 
                 {% for director in object.dir.all %}
-                    <li> <a href="{% url 'DetallesDir' director.id %}">{{director}}</a></li><br>
+                    <li> <a href="{% url 'DirectorDetail' director.id %}">{{director}}</a></li><br>
                 {% endfor %}
         Actor/es:
                 {% for actor in object.act.all %}
-                    <li> <a href="{% url 'DetallesAct' actor.id %}"> {{actor }}</a> </li>
+                    <li> <a href="{% url 'ActorDetail' actor.id %}"> {{actor }}</a> </li>
                 {% endfor %}
                 <br>
        Fecha de estreno: {{object.date}}

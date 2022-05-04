@@ -1,0 +1,29 @@
+{% extends 'main-template2.html' %}
+
+    {% block contenido %}
+    <br><br>
+        <a href='{% url "FindCinema" %}'>Buscar cine </a> &emsp;
+        <br><br>
+        <h1>CREAR UN CINE</h1>
+        <br><br>
+        {% if myform.errors %}
+
+            <p style="color: greenyellow;"> Revisar los datos ingresados </p>
+
+        {% endif %}
+
+        <form method="POST">{% csrf_token %}
+
+        <!-- Acta está la relacion de Formulario de DJANGO reemplazando a el HTML Form-->
+
+            <table>
+
+                {{form.as_p}}
+
+            </table>
+
+            <input type="submit" value="INGRESAR">
+
+        </form>
+        <br><br>
+    {% endblock contenido%}

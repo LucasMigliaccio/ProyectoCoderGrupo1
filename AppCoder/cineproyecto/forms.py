@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Movies, Actors, Directors
+from .models import Movies, Actors, Directors, Cinemas
 
 class MoviesForm(forms.ModelForm):
     class Meta:
@@ -20,7 +20,7 @@ class MoviesForm(forms.ModelForm):
             )
         }
 
-class ActorsForm(forms.ModelForm):
+class ActorForm(forms.ModelForm):
     class Meta:
         model = Actors
         fields = ["name","surname","nac","birth_date"]
@@ -67,46 +67,25 @@ class DirectorsForm(forms.ModelForm):
             return surname.capitalize()
         else:
             return surname
-                  
-# -- Eliminamos Form User -- 
-# class UserForm(forms.Form):
 
-#     Nombre = forms.CharField(max_length=30)
-#     Apellido = forms.CharField(max_length=30)
-#     Usuario = forms.CharField(max_length=30)
-#     Contraseña = forms.CharField(widget=forms.PasswordInput)
-#     Mail = forms.EmailField()
-#     Cumpleaños = forms.DateField()
-#     Informacion = forms.CharField(max_length=30)
-
-class CinemaForm(forms.Form):
-    Nombre = forms.CharField(max_length=30)
-    Direccion = forms.CharField(max_length=30)
-    Asientos = forms.IntegerField()
-    Mail= forms.EmailField()
-    Telefono = forms.IntegerField()
-    Informacion = forms.CharField(max_length=30)
+class CinemaForm(forms.ModelForm):
+    class Meta:
+        model = Cinemas
+        fields = ("name","address","num_of_seats","mail","phone","other_info")
+        widgets = {
+            'date': forms.DateInput(
+                attrs={
+                    "type":"date"
+                }
+            )
+        }
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     first_name = forms.CharField(label="Nombre")
     last_name = forms.CharField(label="Apellido")
     password1= forms.CharField(label="Contraseña", widget=forms.PasswordInput)
-    password2= forms.CharField(label=" Repetir Contraseña", widget=forms.PasswordInput)
-
-    def clean_first_name(self):
-        first_name = self.cleaned_data["first_name"]
-        if(first_name[0] != first_name[0].upper()):
-            return first_name.capitalize()
-        else:
-            return first_name
-    def clean_last_name(self):
-        last_name = self.cleaned_data["last_name"]
-        if(last_name[0] != last_name[0].upper()):
-            return last_name.capitalize()
-        else:
-            return last_name
-    
+    password2= forms.CharField(label=" Repetir Contraseña", widget=forms.PasswordInput) 
 
     class Meta:
         model= User
@@ -118,8 +97,16 @@ class UserEditForm(UserCreationForm):
     img = forms.ImageField(label="Avatar")
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Repetir Contraseña", widget=forms.PasswordInput)
+    first_name = forms.CharField(label="Nombre")
+    last_name = forms.CharField(label="Apellido")
     
     class Meta:
         model= User
-        fields = ["email", "password1", "password2"]
+        fields = ["email", "password1", "password2","first_name","last_name"]
         help_texts= {k: "" for k in fields}
+
+class ThreadForm(forms.Form):
+    username = forms.CharField(label='', max_length=100)
+
+class MessageForm(forms.Form):
+    message = forms.CharField(label='', max_length=1000)

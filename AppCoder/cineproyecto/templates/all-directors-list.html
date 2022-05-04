@@ -16,19 +16,21 @@
                         <a href="{% url 'Actorslist' %}"> ACTORES </a> &emsp; 
                         <a href="{% url 'Directorslist' %}"> DIRECTORES </a>
                         <BR></BR>
-                                      
-                        <a href='{% url "Directores" %}' color="black">Crear nuevo director </a> &emsp; 
-                        <a href='{% url "BusquedaActores" %}'>Buscar director </a> &emsp; 
+                        {% if request.user.is_staff %}           
+                            <a href='{% url "Directors" %}' color="black">Crear nuevo director </a> &emsp; 
+                        {% endif %}
+                        
+                            <a href='{% url "FindDirector" %}'>Buscar director </a> &emsp; 
                         <br><br><br>
 
                         <h4> Directores Registrados </h4>
                         {% for director in object_list%}
                             <li>
                                 {{director}} &emsp;
-                                <a href='{% url "DetallesDir" director.id %}'> Detalles </a> &nbsp;
+                                <a href='{% url "DirectorDetail" director.id %}'> Detalles </a> &nbsp;
                                 {% if request.user.is_staff %}
-                                <a href='{% url "EditDir" director.id %}'> Editar </a> &nbsp;
-                                <a href='{% url "BorrarDir" director.id %}'> Eliminar </a> &nbsp;
+                                <a href='{% url "DirectorEdit" director.id %}'> Editar </a> &nbsp;
+                                <a href='{% url "DirectorDelete" director.id %}'> Eliminar </a> &nbsp;
                                 {% endif  %}
                                 
                                 

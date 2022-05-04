@@ -1,14 +1,26 @@
 {% extends 'main-template.html' %}
+    
     {% block contenido %}
-    <a href='{% url "FormularioCine" %}'>Crear nuevo cine </a> &emsp;
-    <a href='{% url "Findcinema" %}'>Buscar cine </a> &emsp;
-        <p>Resultado de la búsqueda</p>
+    <br><br>
+    {% if request.user.is_staff %}    
+        <a href='{% url "Cinemas" %}'>Crear nuevo cine </a> &emsp;
+    {% endif %}
+        <a href='{% url "FindCinema" %}'>Buscar cine </a> &emsp;
+    <br><br>
+    {% if cinemas %}
+        <p>Cines encontrados: {{cinemas|length}} </p>
         
-                {% for cinema in cinemas %}
+
+        {% for cinema in cinemas %}
               
-                    <li>{{cinema.name}}   -   {{cinema.address}}   -   {{cinema.num_of_seats}}   -   {{cinema.mail}}   -   {{cinema.phone}}   -   {{cinema.other_info}}</li>
-                
-                {% endfor %}
+        <li> {{cinema}}  <a href='{% url "CinemaDetail" cinema.id %}'> Detalles </a> &nbsp;</li>
+    
+    {% endfor %}
+    {% else %}
+        <p> No se encontraron cines con el nombre: {{nombre}} </p>
+        
+    {% endif %}
+    <br><br>
     {% endblock contenido %}
 </body>
 </html>

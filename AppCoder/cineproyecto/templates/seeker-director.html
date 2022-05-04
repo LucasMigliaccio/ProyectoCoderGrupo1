@@ -1,0 +1,20 @@
+{% extends 'main-template2.html' %}
+    {% block contenido %}
+        <br>
+        {% if request.user.is_staff %}
+        <a href='{% url "Directors" %}'>Crear nuevo director </a> &emsp;
+        {% endif %}
+        
+        <br> <br>   
+        <h1>BUSCAR UN DIRECTOR</h1>
+        <p>Ingresá su nombre, apellido o nacionalidad!</p>
+        <br><br>
+    
+        <form action= "/cineproyecto/find-director-get/" method="GET">
+
+                <input type="text" name = "name"> 
+                <input type="submit" value="Buscar">
+
+            </form>
+            <br><br> <br> 
+    {% endblock contenido %}

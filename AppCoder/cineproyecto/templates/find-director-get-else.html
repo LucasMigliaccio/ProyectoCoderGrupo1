@@ -1,0 +1,12 @@
+{% extends 'main-template.html' %}
+
+    {% block contenido %}
+    {% if request.user.is_staff %}
+    <br>
+    <a href='{% url "Directors" %}' color="black">Crear nuevo director </a> &emsp; 
+    {% endif  %}
+    <a href='{% url "FindDirector" %}'>Buscar director </a> &emsp; 
+    <br><br><br>
+        <h4> Nombre no cargado, intertar nuevamente</h4>
+        
+    {% endblock contenido%}

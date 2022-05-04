@@ -1,0 +1,26 @@
+{% extends 'main-template2.html' %}
+
+    {% block contenido %}
+        <br><br>
+        <h4>Cine: {{object.name}}</h4>
+        Dirección: {{object.address}} <br>
+        Capacidad: {{object.num_of_seats}} butacas<br>
+        Correo Electronico: {{object.mail}}<br>
+        Teléfono: {{object.phone}}<br>
+        Información adicional: {{object.other_info}}
+
+       <br><br>
+
+        <div>
+
+            <iframe width="500" height="300" src="{{object.link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+        </div>
+
+
+
+
+        <br><br>
+        <a href='{% url "Movieslist" %}'> Regresar </a>
+
+    {% endblock contenido %}

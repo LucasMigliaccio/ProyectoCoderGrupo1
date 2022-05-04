@@ -1,0 +1,55 @@
+Integrantes grupo 1:
+Lucas Miglaccio (LM)
+Lucas Romanelli (LR)
+Juan Pablo Baigorria (JB)
+
+Listado de componentes y responsables:
+Tareas fundacionales:
+Creación proyecto ------> LM
+Creación App cineproyecto ------> LR
+Herencia HTML y CSS ------> LR 
+
+Modelos:
+Creación modelo Movies ------> LR
+Creación modelo Actors ------> JB
+Creación modelo Directors ------> LR
+Creación modelo Cinemas ------> JB
+Creación modelo Blogs ------> LR
+Creación modelo Avatars ------> JB
+Creación modelo Threads ------> JB/LM
+Creación modelo Messages ------> JB/LM
+Creación Users ------> LM
+Edición User  ------> LM
+
+Administración:
+Migración de modelos para administrar desde 127.0.0.1:8000/admin ------> LM/LR/JB
+
+Formularios de creación:
+Cinema ------> JB
+Movies ------> LR
+Directors ------> LR
+Actors ------> LR
+
+CRUD:
+Movies ------> JB
+Actors ------> LR
+Directors ------> LR
+Cinemas ------> JB
+Blogs ------> LR
+Gestión avatars  ------> LR/JB
+
+Búsquedas:
+Movies ------> JB
+Actors ------> LM/JB
+Direcetors ------> JB
+Cinemas ------> JB
+Blogs (listado y preview de últimos 3) ------> LR
+
+Templates ------> LM/LR/JB
+
+Mejoras y buenas prácticas:
+Normalización de URLs ------> JB
+Agrupamiento de URLs ------> JB
+Normalización de views ------> JB
+Agrupamiento de views ------> JB
+Normalización de nombres de templates ------> JB

@@ -1,16 +1,22 @@
 {% extends 'main-template2.html' %}
     {% block contenido %}
     <br><br>
-    <a href='{% url "Peliculas" %}'>Crear nueva película </a> &emsp;
-    <a href='{% url "BusquedaPelicula" %}'>Buscar película </a> &emsp;
-        <p>Resultado de la búsqueda</p>
+    {% if request.user.is_staff %}
+        <a href='{% url "Movies" %}'>Crear nueva película </a> &emsp;
+    {% endif %}
+        <a href='{% url "FindMovie" %}'>Buscar película </a> &emsp;
+    {% if movies %}
+        <p>Películas encontradas: {{movies|length}} </p>
         
                 {% for movie in movies %}
               
-                    <li>{{movie}}  <a href='{% url "Detalles" movie.id %}'> Detalles </a> &nbsp;</li>
+                    <li>{{movie}}  <a href='{% url "MovieDetail" movie.id %}'> Detalles </a> &nbsp;</li>
                 
                 {% endfor %}
-    <br><br>
+    {% else %}
+        <p> No se encontraron películas con el nombre: {{nombre}} </p>
+    {% endif %}
+        <br><br>
     {% endblock contenido %}
 </body>
 </html>

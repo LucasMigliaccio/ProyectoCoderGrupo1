@@ -1,0 +1,12 @@
+{% extends 'main-template.html' %}
+
+    {% block contenido %}
+    {% if request.user.is_staff %}
+    <br>
+    <a href='{% url "Actors" %}' color="black">Crear nuevo cine </a> &emsp; 
+    {% endif  %}
+    <a href='{% url "FindActor" %}'>Buscar actor </a> &emsp; 
+    <br><br><br>
+        <h4> Nombre no cargado, intertar nuevamente</h4>
+        
+    {% endblock contenido%}

@@ -1,0 +1,24 @@
+{% extends 'main-template2.html' %}
+    {% block contenido %}
+    <br><br>
+    {% if request.user.is_staff %}
+        <a href='{% url "Directors" %}'>Crear nuevo director </a> &emsp;
+    {% endif %}
+        <a href='{% url "FindDirector" %}'>Buscar director </a> &emsp;
+    {% if directors %}
+        <p>Directores encontrados: {{directors|length}} </p>
+        <p>Busqueda: {{ name }} </p>
+        <p>Resultados según nombre, apellido y nacionalidad</p>
+        
+                {% for director in directors %}
+              
+                    <li> {{director}}  <a href='{% url "DirectorDetail" director.id %}'> Detalles </a> &nbsp;</li>
+                
+                {% endfor %}
+    {% else %}
+        <p> No se encontraron actores con el nombre: {{name}} </p>
+    {% endif %}
+        <br><br>
+    {% endblock contenido %}
+</body>
+</html>

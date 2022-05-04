@@ -10,7 +10,7 @@
           <div class="border-right">
             <div class="border-left">
               <div class="inner">
-                <a href='{% url "CrearBlog" %}'>Crear nueva entrada </a> &emsp;
+                <a href='{% url "BlogCreation" %}'>Crear nueva entrada </a> &emsp;
                 {% if request.user.is_staff %}
 
                 <a href='{% url "AproveBlog" %}'>Pendientes Aprobación </a> &emsp;
@@ -20,7 +20,7 @@
                
                 {% for blog in blog_toaprove %}
 
-                  <li> <a href='{% url "EditarBlog" blog.id %}'>{{blog.title}} by {{blog.author}} </a></li>
+                  <li> <a href='{% url "BlogEdit" blog.id %}'>{{blog.title}} by {{blog.author}} </a></li>
                   
                   {% endfor %}
 

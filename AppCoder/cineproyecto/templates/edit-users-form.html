@@ -21,9 +21,9 @@
 
     {% endif %}
 
-    <form action="/cineproyecto/edit_user/" method="POST" enctype="multipart/form-data"></form>> {% csrf_token %}
+    <form action="/cineproyecto/edit_user/" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 
-        <h4> Hola {{user}}, modificá tus datos e ingresa tu contraseña para confirmar:</h4>
+        <h4> Hola {{user.first_name}}, modificá tus datos e ingresa tu contraseña para confirmar:</h4>
         <!-- Acta está la relacion de Formulario de DJANGO reemplazando a el HTML Form-->
 
         <table>

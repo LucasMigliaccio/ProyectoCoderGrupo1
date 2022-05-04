@@ -1,0 +1,27 @@
+{% extends 'main-template2.html' %}
+	
+
+{% block contenido %}
+	<meta http-equiv="refresh" content="5">	
+	<h4>Tus chats</h4>
+	{% for thread in threads.all %}
+		{% if request.user == thread.user %}		
+		Chat con {{ thread.receiver }}
+		{% else %}
+		Chat con {{ thread.user }}
+		{% endif %}
+		<a href="{% url 'thread' thread.pk %}"> Ir al chat</a><br>
+			
+	{% endfor %}
+	<br><br>
+	<form method="GET" action="{% url 'create-thread' %}">
+		<button class="btn btn-light p-3" type="submit">Comenzar una conversación</button>
+	</form>
+	Usuarios de la plataforma:<br>
+	{% for usuario in users %}
+        {% if not usuario == request.user %}
+        	{{usuario}}<br>
+        {% endif %}
+	{% endfor%}
+
+{% endblock contenido %}

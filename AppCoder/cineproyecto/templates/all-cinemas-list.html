@@ -9,13 +9,28 @@
                     <div class="box">
                       <div class="border-right">
                         <div class="border-left">
-                          <div class="inner">        
-                            <a href='{% url "FormularioCine" %}'>Crear nuevo cine </a> &emsp;
-                            <a href='{% url "Findcinema" %}'>Buscar cine </a> &emsp;
+                          <div class="inner">
+                            {% if request.user.is_staff %}        
+                                <a href='{% url "Cinemas" %}'>Crear nuevo cine </a> &emsp;
+                            {% endif %}
+                            <a href='{% url "FindCinema" %}'>Buscar cine </a> &emsp;
                             <h4> Cines Registrados </h4>
-                            {% for cinema in object_list %}
-                                <li>{{cinema.name}}   -   {{cinema.address}}   -   {{cinema.num_of_seats}}   -   {{cinema.mail}}   -   {{cinema.phone}}   -   {{cinema.other_info}}</li>
-                            {% endfor %}
+                            
+                            {% for cinema in object_list%}
+                            <li>
+                                {{cinema}} &emsp;
+                                <a href='{% url "CinemaDetail" cinema.id %}'> Detalles </a> &nbsp;
+                                {% if request.user.is_staff %}
+                                <a href='{% url "CinemaEdit" cinema.id %}'> Editar </a> &nbsp;
+                                <a href='{% url "CinemaDelete" cinema.id %}'> Eliminar </a> &nbsp;
+                                {% endif  %}
+                                
+                                
+                                
+                                
+                            </li>
+                        {% endfor %}
+                            
                             </div>
                         </div>
                     </div>

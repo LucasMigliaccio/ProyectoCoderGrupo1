@@ -1,10 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
+    {% load static %}
     {% load static %}
 
     <title>Cinema Center</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
     <link href="{% static 'cineproyecto/css/style.css' %}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{% static 'cineproyecto/images/favicon.ico' %}">
     <script src="{% static 'cineproyecto/js/jquery-1.4.2.min.js' %}" type="text/javascript"></script>
@@ -25,15 +28,17 @@
     <div id="main">
       <div id="header">
         <div class="row-1">
-          <div class="fleft"><a href="#">Cinema <span>Center</span></a></div>
+          <div class="fleft"><a href="{% url 'Inicio' %}">Cinema <span>Center</span></a></div>
           <ul>
-            <li><a href="{% url 'Inicio' %}"><img src="{% static 'cineproyecto/images/home.png' %}" alt="" /></a></li>
-            {% if request.user.is_authenticated %}
-            <li><a href="{% url 'EditUser' %}"><img src="{{ avatar.picture.url }}" style= "max-width:15%; height:auto;" /> </a></li>
-            <li><a href="{% url 'logout' %}"><img src="{% static 'cineproyecto/images/logout_.png' %}" alt="" /></a></li>
-            {% else %}
-            <li><a href="{% url 'login' %}"><img src="{% static 'cineproyecto/images/perfilm.png' %}" alt="" /></a></li>
-            {% endif %}
+            <!-- <li><a href="{% url 'Inicio' %}"><img src="{% static 'cineproyecto/images/home.png' %}" alt="" /></a></li> -->
+         
+          {% if request.user.is_authenticated %}
+              <li><a href="{% url 'EditUser' %}"><img src="{{ avatar.picture.url }}" style= "max-width:20%; height:auto;"/> </a></li>
+              <li><a href="{% url 'inbox' %}"><img src="{% static 'cineproyecto/images/mailavatar.jpg' %}" style= "max-width:50%; height:auto;"/> </a></li>
+              <li><a href="{% url 'logout' %}"><img src="{% static 'cineproyecto/images/logout.png' %}" alt="" /></a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}"><img src="{% static 'cineproyecto/images/login_3.png' %}" alt="" /></a></li>
+          {% endif %}
           </div>
         <div class="row-2">
           <ul>

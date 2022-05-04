@@ -11,7 +11,7 @@
           <div class="border-right">
             <div class="border-left">
               <div class="inner">
-                <a href='{% url "CrearBlog" %}'>Crear nueva entrada </a> &emsp;
+                <a href='{% url "BlogCreation" %}'>Crear nueva entrada </a> &emsp;
                 {% if request.user.is_staff %}
                   <a href='{% url "AproveBlog" %}'>Pendientes Aprobación </a> &emsp;
                 {% endif %}
@@ -23,7 +23,7 @@
                 
                     {% for last in lastblogs %}
         
-                      <li><img src="{{last.img.url}}" style= "max-width:20%; height:auto;" /><a href='{% url "DetalleBlog" last.id %}'>{{last.title}}</a><br />
+                      <li><img src="{{last.img.url}}" style= "max-width:20%; height:auto;" /><a href='{% url "BlogDetail" last.id %}'>{{last.title}}</a><br />
                       {{last.subtitle}} by {{last.author}}. ({{last.date}})</li>
                     
                     {% endfor %}
@@ -44,9 +44,9 @@
               {% if blog.aprove == True %}
 
               <li>{{blog.title}} by {{blog.author}} -- {{blog.date}} &emsp;
-              <a href='{% url "DetalleBlog" blog.id %}'> Detalles </a>&emsp;
+              <a href='{% url "BlogDetail" blog.id %}'> Detalles </a>&emsp;
               {% if request.user.is_staff %}
-              <a href='{% url "BorrarBlog" blog.id %}'> Eliminar </a>
+              <a href='{% url "BlogDelete" blog.id %}'> Eliminar </a>
               {% endif %}
               </li>
 

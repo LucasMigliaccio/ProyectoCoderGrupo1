@@ -1,0 +1,16 @@
+# Django
+django 4.0.3
+# Sqlite3
+sqlite3 
+#SQLparse
+sqlparse ==0.4.2
+#django messages
+django-messages==0.6.0
+#Pillow
+Pillow==9.1.0
+#DBrowser(a elección)
+DBbrowser(Sqlite)
+#Env
+pipenv
+#django asgi
+asgiref==3.5.0

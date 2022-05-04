@@ -1,8 +1,10 @@
 {% extends 'main-template2.html' %}
     {% block contenido %}
-        <br><br>
-        <a href='{% url "Peliculas" %}'>Crear nueva película </a> &emsp;
-        <br><br> <br>   
+        <br>
+        {% if request.user.is_staff %}
+        <a href='{% url "Movies" %}'>Crear nueva película </a> &emsp;
+        {% endif %}
+        <br> <br>   
         <h1>BUSCAR UNA PELÍCULA</h1>
         <br><br>
     

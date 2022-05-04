@@ -1,7 +1,12 @@
 {% extends 'main-template.html' %}
 
     {% block contenido %}
-
-        <h3> Nombre no cargado, intertar nuevamente</h3>
-
+    {% if request.user.is_staff %}
+    <br>
+    <a href='{% url "Movies" %}' color="black">Crear nueva película </a> &emsp; 
+    {% endif  %}
+    <a href='{% url "FindMovie" %}'>Buscar película </a> &emsp; 
+    <br><br><br>
+        <h4> Nombre no cargado, intentar nuevamente</h4>
+        <br>
     {% endblock contenido%}
